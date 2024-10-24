@@ -1,4 +1,4 @@
-# What's On static website.
+# What's On interactive website.
 
 The client JS reads the JSON uploaded from EZproxy UAT, <br/>
 using a cronjob that lunches: <br/>
