@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Library Events</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container">
+            <div class="col-md-12">
+                <h1 class="library-header">
+                    UNSW Library
+                    <img class="img-fluid" src="unsw_0.png" alt="UNSW Logo">
+                </h1>
+                <hr class="custom-line">
+                <h2 class="whats-on-header">
+                    What's on <span class="library-text">at the library!</span>
+                </h2>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container">
+
+        <div class="calendar-container">
+            <div class="text-center mb-4">
+                <div id="month-container" class="d-flex justify-content-center"></div>
+                <!-- Month will be injected here -->
+            </div>
+
+            <div class="text-center mb-4">
+                <div id="week-container" class="d-flex justify-content-center"></div>
+                <!-- Weekdays will be injected here -->
+            </div>
+        </div>
+
+        <div id="event-container" class="mt-4">
+            <!-- This will hold the events -->
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light p-3 text-center footer-spacing">
+        <div class="container text-center">
+            <h3 class="important-events-title">Important events coming up:</h3>
+            <div id="important-events-list">
+                <!-- Events will be injected here -->
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Linking to the external JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
