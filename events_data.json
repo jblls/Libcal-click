@@ -77,8 +77,8 @@
       "id": 5737936,
       "title": "test 1",
       "allday": false,
-      "start": "2024-10-24T12:00:00+11:00",
-      "end": "2024-10-24T13:00:00+11:00",
+      "start": "2024-10-24T14:00:00+11:00",
+      "end": "2024-10-24T15:00:00+11:00",
       "description": "",
       "url": {
         "public": "https://unsw.libcal.com/event/5737936",
@@ -269,7 +269,7 @@
     },
     {
       "id": 5737940,
-      "title": "Test Saturday 1",
+      "title": "Test Friday 1",
       "allday": false,
       "start": "2024-10-25T10:00:00+11:00",
       "end": "2024-10-25T11:00:00+11:00",
@@ -287,7 +287,12 @@
         "id": 5505,
         "name": "Law Library"
       },
-      "category": [],
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
       "owner": {
         "id": 58243,
         "name": "Stefano Bernardi"
