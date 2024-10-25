@@ -137,7 +137,9 @@ header {
     z-index: 1;
     /* Make sure it appears on top of the card */
 }
-
+.clickable {
+    cursor: pointer; /* Changes the cursor to a hand icon on hover */
+}
 
 .later-today {
     position: absolute;

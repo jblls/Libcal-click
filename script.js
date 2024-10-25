@@ -6,7 +6,16 @@ let eventsData = null; // Declare a variable to store the fetched events
 async function getEvents() {
     try {
         // Fetch the JSON file
-        const response = await fetch('events_data.json', { method: 'GET' });
+        const response = await fetch('https://abjo4xvpap33no3edn665hgjza0axriu.lambda-url.ap-southeast-2.on.aws/', 
+            { method: 'GET' }
+        );
+
+          // Check if the request was successful
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+
         const eventData = await response.json();
 
         console.log(eventData);  // Log the event data to verify the content
@@ -290,8 +299,8 @@ function init() {
     displayMonthHeader();
     displayWeek();
 
-    // Check for updates every 1 minutes (60,000 milliseconds)
-    setInterval(checkForUpdates, 60000);
+    // Check for updates every 100 minutes (60,000 milliseconds)
+    setInterval(checkForUpdates, 6000000);
 }
 
 init();
