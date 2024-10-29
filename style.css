@@ -2,7 +2,10 @@
 /*         Base Styles      */
 /* ========================= */
 
-html,
+html {
+    font-size: 16px; /* Base root size: 1rem = 16px */
+}
+
 body {
     width: 100%;
     height: 100vh;
@@ -11,36 +14,55 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+@media (min-width: 2150px) {
+    html {
+        font-size: 20px; 
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; 
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px; 
+    }
+}
+
+
 /* ========================= */
 /*         Header           */
 /* ========================= */
 
 header {
     background-color: #ffffff;
-    padding: 10px;
-    border-bottom: 1.2px solid #c2c2c2;
-    margin-bottom: 20px;
+    padding: 0.625rem; /* 10px */
+    border-bottom: 0.075rem solid #c2c2c2; /* 1.2px */
+    margin-bottom: 1.25rem; /* 20px */
 }
 
 .library-header {
     font-weight: bold;
-    font-size: 2rem; /* Use rem units for consistent scaling */
+    font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 1.25rem 0; /* 20px */
 }
 
 .library-header img {
     max-width: 100%;
     height: auto;
-    max-height: 4rem; 
+    max-height: 4rem;
 }
 
 .custom-line {
     margin-left: 0;
     border: none;
-    border-top: 5px solid gray;
+    border-top: 0.3125rem solid gray; /* 5px */
     width: 33%;
     margin: 0;
 }
@@ -52,26 +74,23 @@ header {
 .whats-on-header {
     font-weight: bold;
     text-align: left;
-    font-size: 1.8rem; /* Use rem for consistent scaling */
-    margin: 20px 0 0 0;
+    font-size: 1.8rem;
+    margin: 1.25rem 0 0 0;
 }
 
 .library-text {
-    font-size: 1.5rem; /* Use rem for scaling text */
+    font-size: 1.5rem;
     font-weight: normal;
 }
-
 
 /* ========================= */
 /*        Calendar          */
 /* ========================= */
 
-
-/* Month Icons */
 #month-container i {
     font-size: 1.4rem;
     color: #636363;
-    margin-right: 10px;
+    margin-right: 0.625rem; /* 10px */
 }
 
 .calendar-container {
@@ -82,53 +101,50 @@ header {
     box-sizing: border-box;
 }
 
-/* Highlight calendar week date */
 .highlight {
-    background-color: rgb(255, 187, 169); 
-    border-radius: 4px;
-    padding: 5px;
+    background-color: rgb(255, 187, 169);
+    border-radius: 0.25rem; /* 4px */
+    padding: 0.3125rem; /* 5px */
     font-weight: bold;
 }
 
 .clickable {
-    cursor: pointer; /* Changes the cursor to a hand icon on hover */
+    cursor: pointer;
 }
-
 
 /* ========================= */
 /*         Card Styles      */
 /* ========================= */
 
-
 #event-container {
-    height: 700px; /* height of 5 cards (+padding) of 120px  */
-    overflow-y: auto; /* Enable scrolling */
+    height: 43.75rem; /* 700px */
+    overflow-y: auto;
 }
 
 .no-events-text {
-    font-size: 40px; 
+    font-size: 2.5rem; /* 40px */
     font-weight: bold;
-    color: rgb(161, 161, 161); 
-    margin: 150px 0;
-    display: flex;  
-    align-items: center; 
-    justify-content: center; 
-}
-/* Smile Face Icon */
-.no-events-text i {
-    font-size: 3rem; 
-    margin-right: 30px;
+    color: rgb(161, 161, 161);
+    margin: 9.375rem 0; /* 150px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Light yellow background for highlighted card */
+.no-events-text i {
+    font-size: 3rem;
+    margin-right: 1.875rem; /* 30px */
+}
+
 .highlight-card {
-    background-color: rgb(242, 235, 204, 0.39) !important; 
+    background-color: rgba(242, 235, 204, 0.39) !important;
 }
 
 .card-body {
-    padding-top: 7px;
-    padding-bottom: 5px;
+    padding-top: 0.4375rem; /* 7px */
+    padding-bottom: 0.3125rem; /* 5px */
 }
+
 .card-title {
     font-weight: bold;
 }
@@ -136,36 +152,36 @@ header {
 .happening-soon,
 .later-today {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.625rem; /* 10px */
+    right: 0.625rem; /* 10px */
     color: #000000;
-    padding: 9px 9px;
-    font-size: 12px;
+    padding: 0.5625rem; /* 9px */
+    font-size: 0.75rem; /* 12px */
     font-weight: bold;
-    border-radius: 3px;
-    z-index: 1; /* Ensure it appears on top of the card */
+    border-radius: 0.1875rem; /* 3px */
+    z-index: 1;
 }
+
 .happening-soon {
     background-color: rgb(255, 228, 105);
 }
+
 .later-today {
     background-color: rgb(230, 230, 230);
 }
-
 
 /* ========================= */
 /*         Card Text        */
 /* ========================= */
 
 .card-text {
-    margin-bottom: 1px;
-    text-indent: 3px;
+    margin-bottom: 0.0625rem; /* 1px */
+    text-indent: 0.1875rem; /* 3px */
 }
 
-/* Indentation after semicolon */ 
 .card-text .label {
     display: inline-block;
-    width: 100px; /* Adjust this value to fit your layout */
+    width: 6.25rem; /* 100px */
 }
 
 /* ========================= */
@@ -173,24 +189,23 @@ header {
 /* ========================= */
 
 footer {
-    height: 441px; /* height of 4 cards */
-    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+    height: 27.56rem; /* 441px */
+    overflow-y: auto;
 }
 
 .important-events-title {
     text-align: left;
     font-weight: bold;
     font-size: 2rem;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem; /* 30px */
 }
 
-/* Footer events Cards */
 .event-item {
     display: flex;
     background-color: #333;
-    padding: 10px;
+    padding: 0.625rem; /* 10px */
     align-items: center;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* 5px */
 }
 
 .event-date {
@@ -201,31 +216,32 @@ footer {
     text-align: center;
 }
 
-/* > only includes direct children, not nested elements */
 .event-date > * {
     flex: 1;
-    min-width: 50px;
+    min-width: 3.125rem; /* 50px */
 }
+
 .event-date strong {
-    font-size: 24px;
+    font-size: 1.5rem; /* 24px */
 }
+
 .event-date span {
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px */
 }
 
 .event-details {
-    margin-left: 15px;
+    margin-left: 0.9375rem; /* 15px */
     flex-grow: 1;
     text-align: left;
 }
 
 .event-title {
     font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
+    font-size: 1.125rem; /* 18px */
+    margin-bottom: 0.3125rem; /* 5px */
 }
 
 .event-time-location {
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px */
     color: #ccc;
 }
