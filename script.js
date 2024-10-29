@@ -9,8 +9,8 @@ function generateQRCode(elementId, url = window.location.href) {
     element.innerHTML = "";
     new QRCode(element, {
         text: url,
-        width: 80,
-        height: 80
+        width: 70,
+        height: 70
     });
 }
 generateQRCode("qrcode");
