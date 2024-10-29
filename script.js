@@ -2,14 +2,45 @@ let lastData = null; // Variable to store the last fetched data
 let eventsData = null; // Declare a variable to store the fetched events
 
 
-// Fetch events from local JSON file
+// Format time to display only hours and minutes
+function formatTime(date) {
+    return date.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true });
+}
+
+
+// Fetch JSON file
+async function fetchEventData(filePath) {
+    let eventData = [];
+    try {
+        const response = await fetch(filePath, { method: 'GET' });
+        if (response.ok) {
+            const data = await response.json();
+            eventData = Array.isArray(data.events) ? data.events : [];
+        } else {
+            console.warn(`File ${filePath} not found (404), ignoring...`);
+        }
+    } catch (error) {
+        console.warn(`Error fetching events from ${filePath}:`, error);
+    }
+    console.log(eventData); 
+    return eventData;
+}
+
+// Fetch JSON files and load them into 1 Object
 async function getEvents() {
     try {
+        /*
         // Fetch the JSON file
         const response = await fetch('events_data.json', { method: 'GET' });
         const eventData = await response.json();
+        */
 
-        console.log(eventData);  // Log the event data to verify the content
+        const eventData1 = await fetchEventData('events_data.json');
+        const eventData2 = await fetchEventData('events_data2.json');
+        
+        // Combine the two event data arrays
+        const eventData =  {events: [...eventData1, ...eventData2]};
+        console.log(eventData);  
 
         return eventData; // Return the fetched event data
 
@@ -18,10 +49,12 @@ async function getEvents() {
     }
 }
 
+// Check if the Json Object has changed, and if so, 
+// call displayEvents & displayFutureEvents
 async function checkForUpdates() {
-    const newData = await getEvents(); // Fetch the events data
+    const newData = await getEvents(); 
 
-    // Compare the new data with the last fetched data
+    // Compare the newly read data with the last fetched data
     if (newData && JSON.stringify(newData) !== JSON.stringify(lastData)) {
         console.log('Data has changed, refreshing the page...');
         lastData = newData; // Update lastData to the new data
@@ -29,43 +62,48 @@ async function checkForUpdates() {
 
         // Display events only if data has changed
         displayEvents(newData, new Date()); // Display events for today
-        displayImportantEvents(newData); // Display events for the next 3 days
+        displayFutureEvents(newData); // Display future events
     } else {
         console.log('No change in data.');
     }
 }
 
-// Display the current month header with an icon
+// Display the current Month header with the icon
 function displayMonthHeader() {
-    const currentDate = new Date();
     const monthHeader = document.getElementById('month-container');
-    monthHeader.classList.add('text-center', 'mb-3');
+    const today = new Date();
+
     monthHeader.innerHTML = `
-        <i class="bi bi-calendar3" style="margin-right: 8px;"></i>
-        <h3>${currentDate.toLocaleString('default', { month: 'long' })}</h3>
+        <i class="bi bi-calendar3"></i>
+        <h3>${today.toLocaleString('default', { month: 'long' })}</h3>
     `;
 }
 
-// Display the week, starting from Monday
+// Display the week, starting from Monday until Sunday
 function displayWeek() {
     const weekContainer = document.getElementById('week-container');
     const today = new Date();
-    const currentDay = today.getDay();
-    const startOfWeek = new Date(today);
-    const daysToMonday = (currentDay === 0) ? 6 : currentDay - 1;
-    startOfWeek.setDate(today.getDate() - daysToMonday);
-
+    const startOfWeek = new Date();
     const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    // Map Sunday (0) to 6, Monday (1) to 0, etc.
+    const daysFromMonday = (today.getDay() + 6) % 7; 
+    startOfWeek.setDate(today.getDate() - daysFromMonday);
 
     // Clear existing week content if any
     weekContainer.innerHTML = '';
 
     for (let i = 0; i < 7; i++) {
         const dayDate = new Date(startOfWeek);
+        // Get the date for each day of the week
         dayDate.setDate(startOfWeek.getDate() + i);
 
         const dayDiv = document.createElement('div');
-        dayDiv.classList.add('p-2', 'text-center', 'clickable'); // Added 'clickable' class for interactivity
+        dayDiv.classList.add('p-2', 'text-center', 'clickable'); 
+        dayDiv.innerHTML = `
+            <div>${dayDate.getDate()}</div>
+            <div>${dayNames[i]}</div>
+        `;
 
         if (dayDate.toDateString() === today.toDateString()) {
             dayDiv.classList.add('highlight');
@@ -82,11 +120,8 @@ function displayWeek() {
 
             // Show events for the clicked day
             displayEvents(eventsData, dayDate);
-            //console.log(dayDate);
         });
-
-
-        dayDiv.innerHTML = `<div>${dayDate.getDate()}</div><div>${dayNames[i]}</div>`;
+        
         weekContainer.appendChild(dayDiv);
     }
 }
@@ -94,87 +129,95 @@ function displayWeek() {
 // Display event cards and highlight the closest event
 function displayEvents(events, selectedDate) {
     const eventContainer = document.getElementById('event-container');
-    const currentDate = new Date();
+    const isToday = selectedDate.toDateString() === new Date().toDateString();
 
+    // Clear existing content
     eventContainer.innerHTML = '';
 
-    console.log(selectedDate);
-    console.log(events);
+    // Get up to 10 relevant events, for Today or Future days,
+    //depending on the selected date
+    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 5);
 
-    // Check if the selectedDate is today
-    const isSameDay = selectedDate.toDateString() === currentDate.toDateString();
+    if (relevantEvents.length === 0) {
+        eventContainer.appendChild(createNoEventsCard());
+    } else {
+        relevantEvents.forEach(event => {
+            const { card, timeDiff } = createEventCard(event, selectedDate);
+            eventContainer.appendChild(card);
 
-
-    const futureEvents = isSameDay
-        ? filterAndSortTodayEvents(events, selectedDate)
-        : filterAndSortFutureEvents(events, selectedDate);
-
-
-    console.log(selectedDate);
-    console.log(futureEvents);
-
-    // Limit to the next 10 events
-    const limitedEvents = futureEvents.slice(0, 10);
-
-    limitedEvents.forEach(event => {
-        const { card, timeDiff } = createEventCard(event, selectedDate);
-        eventContainer.appendChild(card);
-
-
-        // If it's a future day, do not add highlighting
-        if (isSameDay) {
-
-            // Check if the event starts within the next 2 hours (7200000 milliseconds) 
-            if (timeDiff > 0 && timeDiff <= 7200000) {
-                highlightEvent(card);
+            // Highlight or label event only if it's today
+            if (isToday) {
+                timeDiff > 0 && timeDiff <= 7200000 ? highlightEvent(card) : laterEvent(card);
             }
-            else {
-                laterEvent(card);
-            }
-
-        }
-
-    });
+        });
+    }
 
 }
 
 
-// Highlight the closest event card
+// Function to create the "No Events Today" card
+function createNoEventsCard() {
+    const card = document.createElement('div');
+    card.innerHTML = `
+        <div class="no-events-text">
+        <i class="bi bi-emoji-frown"></i>
+        No events today
+        </div>
+    `;
+    return card;
+}
+
+
+// Create event card
+function createEventCard(event, selectedDate) {
+    const eventStartDate = new Date(event.start);
+    const timeDiff = eventStartDate - selectedDate;
+
+    const card = document.createElement('div');
+    card.classList.add('event-card', 'card', 'mb-3', 'shadow-sm', 'bg-light');
+    card.innerHTML = `
+        <div class="card-body">
+            <h5 class="card-title">${event.title}</h5> 
+            <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>
+            <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
+            <p class="card-text"><span class="label">When:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
+        </div>
+    `;
+
+    return { card, timeDiff };
+}
+
+// Add highlight-card class for light yellow background,
+// and Happening soon little box
 function highlightEvent(card) {
     card.classList.add('highlight-card');
     card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
 }
 
-// Highlight the closest event card 
-
+// Add Later today little box
 function laterEvent(card) {
     card.classList.add('later-card');
     card.innerHTML += `<div class="later-today">Later today</div>`;
 }
 
-function displayImportantEvents(events) {
-    const importantEventsList = document.getElementById('important-events-list'); // Updated ID for the events list
-    importantEventsList.innerHTML = ''; // Clear previous content
-    const currentDate = new Date();
-    const upcomingEvents = filterAndSortImportantEvents(events, currentDate);
 
-    // Limit to the next 10 events
-    const limitedEvents = upcomingEvents.slice(0, 5);
+function displayFutureEvents(events) {
+    const importantEventsList = document.getElementById('important-events-list'); 
+    importantEventsList.innerHTML = ''; 
+    const upcomingEvents = filterAndSortImportantEvents(events, new Date()).slice(0, 4);
 
     // Create a structured list of event details
-    limitedEvents.forEach(event => {
+    upcomingEvents.forEach(event => {
         const eventStart = new Date(event.start);
         const eventEnd = new Date(event.end);
 
-        const dayNumber = eventStart.getDate(); // Get the day number
-        const dayName = eventStart.toLocaleString('default', { weekday: 'short' }); // Get the abbreviated day name
-        const startTime = formatTime(eventStart); // Use your existing formatTime function
-        const endTime = formatTime(eventEnd); // Use your existing formatTime function
-        const location = event.location.name || 'N/A'; // Get location
+        const dayNumber = eventStart.getDate(); 
+        const dayName = eventStart.toLocaleString('default', { weekday: 'short' }); 
+        const location = event.location.name || 'N/A'; 
 
         // Create a new div for each event
         const eventDiv = document.createElement('div');
-        eventDiv.classList.add('event-item', 'my-2'); // Add classes for styling
+        eventDiv.classList.add('event-item', 'my-2'); 
         eventDiv.innerHTML = `
             <div class="event-date">
                 <strong>${dayNumber}</strong>
@@ -182,34 +225,27 @@ function displayImportantEvents(events) {
             </div>
             <div class="event-details">
                 <div class="event-title">${event.title}</div>
-                <div class="event-time-location">${startTime} - ${endTime} &nbsp;&nbsp; | &nbsp;&nbsp; ${event.campus.name} &nbsp;&nbsp; | &nbsp;&nbsp; ${location}</div>
+                <div class="event-time-location">
+                    ${formatTime(eventStart)} - ${formatTime(eventEnd)} &nbsp;&nbsp; | &nbsp;&nbsp; ${event.campus.name} &nbsp;&nbsp; | &nbsp;&nbsp; ${location}
+                </div>
             </div>
         `;
 
-        // Append the eventDiv to the importantEventsList
         importantEventsList.appendChild(eventDiv);
     });
 }
 
 
 
-
-
-
-
-
-
-// Filter and sort future events by start time
+// Filter and sort future events (setting the start at midnight) by start time
 function filterAndSortFutureEvents(events, selectedDate) {
-    const startOfDay = new Date(selectedDate);
-    startOfDay.setHours(00, 00, 00, 000); // End of today
-    const endOfToday = new Date(selectedDate);
-    endOfToday.setHours(23, 59, 59, 999); // End of today
+    const startOfDay = new Date(selectedDate).setHours(0, 0, 0, 0);
+    const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
 
     return events.events
         .filter(event => {
-            const eventStart = new Date(event.start); // Get the event's start time
-            return eventStart >= startOfDay && eventStart <= endOfToday; // Event is today
+            const eventStart = new Date(event.start).getTime();
+            return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -217,70 +253,36 @@ function filterAndSortFutureEvents(events, selectedDate) {
 // Filter and sort Today events by start time
 function filterAndSortTodayEvents(events, selectedDate) {
     const startOfDay = new Date(selectedDate);
-    const endOfToday = new Date(selectedDate);
-    endOfToday.setHours(23, 59, 59, 999); // End of today
+    const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
 
     return events.events
         .filter(event => {
-            const eventStart = new Date(event.start); // Get the event's start time
-            return eventStart >= startOfDay && eventStart <= endOfToday; // Event is today
+            const eventStart = new Date(event.start).getTime(); 
+            return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
 
 function filterAndSortImportantEvents(events, currentDate) {
-    const threeDaysFromNow = new Date(currentDate);
-    threeDaysFromNow.setDate(currentDate.getDate() + 5); // Set to three days from now
-    const tomorrow = new Date(currentDate);
-    tomorrow.setDate(currentDate.getDate() + 0);
-    tomorrow.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(currentDate).setHours(0, 0, 0, 0);
+    const DaysAhead = new Date(currentDate).setDate(currentDate.getDate() + 5);
 
     return events.events
         .filter(event => {
-            const eventStart = new Date(event.start);
+            const eventStart = new Date(event.start).getTime();
             return (
                 eventStart > tomorrow &&
-                eventStart <= threeDaysFromNow && // Event is within the next 3 days
-                (
-                    event.category.some(cat => cat.name === 'Important') ||
-                    event.category.some(cat => cat.name === 'Scholarly Resources')
+                eventStart <= DaysAhead &&
+                event.category.some(
+                    cat => cat.name === 'Important' || 
+                    cat.name === 'Scholarly Resources'
                 )
             );
         })
-        .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
+        .sort((a, b) => new Date(a.start) - new Date(b.start));
 }
 
 
-
-
-// Create event card
-function createEventCard(event, selectedDate) {
-    const eventStartDate = new Date(event.start);
-    const formattedTimestart = formatTime(eventStartDate);
-
-    const eventEndDate = new Date(event.end);
-    const formattedTimeend = formatTime(eventEndDate);
-
-    const timeDiff = eventStartDate - selectedDate;
-
-    const card = document.createElement('div');
-    card.classList.add('event-card', 'card', 'mb-3', 'shadow-sm', 'bg-light');
-    card.innerHTML = `
-        <div class="card-body">
-            <h5 class="card-title font-weight-bold">${event.title}</h5> 
-            <p class="card-text"><span class="label">Campus:</span> ${event.campus.name || 'N/A'}</p>
-            <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
-            <p class="card-text"><span class="label">When:</span> ${formattedTimestart} - ${formattedTimeend}</p>
-        </div>
-    `;
-
-    return { card, timeDiff };
-}
-
-// Format time to display only hours and minutes
-function formatTime(date) {
-    return date.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true });
-}
 
 
 
