@@ -1,13 +1,11 @@
 # What's On interactive website.
 
-The client JS reads the JSON uploaded from EZproxy UAT, <br/>
-using a cronjob that lunches: <br/>
+The client JS reads the JSON uploaded to the S3 bucket where the Webapp is hosted, <br/>
+with an AWS Lambda, triggered every X hours. <br/>
+
+The python script: <br/>
 */home/nfs/z3541612_sa/libcal/**libcal.py*** <br/> 
-
-At the moment it uses my local WSL Linux to run the script: </br>
-*/home/ste/Documents/libcal/**libcal.py***
-
-The python script call the Springshare API to get Events details, <br/>
-and upload the JSON to Github Pages using PyGithub.  <br/>
-Need access token generated from Settings > Developer Settings > Personal Access Tokens, <br/>
-with repo permissions. 
+also uploades the JSON to this github repo using PyGithub.
+The script is also located on my local WSL Linux: </br>
+*/home/ste/Documents/libcal/**libcal.py*** </br>
+and needs an access token generated from Settings > Developer Settings > Personal Access Tokens, with repo permissions. 
