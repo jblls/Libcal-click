@@ -2,6 +2,20 @@ let lastData = null; // Variable to store the last fetched data
 let eventsData = null; // Declare a variable to store the fetched events
 
 
+function generateQRCode(elementId, url = window.location.href) {
+    const element = document.getElementById(elementId);
+
+    // Clear any existing QR code if present
+    element.innerHTML = "";
+    new QRCode(element, {
+        text: url,
+        width: 80,
+        height: 80
+    });
+}
+generateQRCode("qrcode");
+
+
 // Format time to display only hours and minutes
 function formatTime(date) {
     return date.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric', hour12: true });
@@ -22,7 +36,7 @@ async function fetchEventData(filePath) {
     } catch (error) {
         console.warn(`Error fetching events from ${filePath}:`, error);
     }
-    console.log(eventData); 
+    console.log(eventData);
     return eventData;
 }
 
@@ -37,10 +51,10 @@ async function getEvents() {
 
         const eventData1 = await fetchEventData('events_data.json');
         const eventData2 = await fetchEventData('events_data2.json');
-        
+
         // Combine the two event data arrays
-        const eventData =  {events: [...eventData1, ...eventData2]};
-        console.log(eventData);  
+        const eventData = { events: [...eventData1, ...eventData2] };
+        console.log(eventData);
 
         return eventData; // Return the fetched event data
 
@@ -52,7 +66,7 @@ async function getEvents() {
 // Check if the Json Object has changed, and if so, 
 // call displayEvents & displayFutureEvents
 async function checkForUpdates() {
-    const newData = await getEvents(); 
+    const newData = await getEvents();
 
     // Compare the newly read data with the last fetched data
     if (newData && JSON.stringify(newData) !== JSON.stringify(lastData)) {
@@ -87,7 +101,7 @@ function displayWeek() {
     const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     // Map Sunday (0) to 6, Monday (1) to 0, etc.
-    const daysFromMonday = (today.getDay() + 6) % 7; 
+    const daysFromMonday = (today.getDay() + 6) % 7;
     startOfWeek.setDate(today.getDate() - daysFromMonday);
 
     // Clear existing week content if any
@@ -99,7 +113,7 @@ function displayWeek() {
         dayDate.setDate(startOfWeek.getDate() + i);
 
         const dayDiv = document.createElement('div');
-        dayDiv.classList.add('p-2', 'text-center', 'clickable'); 
+        dayDiv.classList.add('p-2', 'text-center', 'clickable');
         dayDiv.innerHTML = `
             <div>${dayDate.getDate()}</div>
             <div>${dayNames[i]}</div>
@@ -121,7 +135,7 @@ function displayWeek() {
             // Show events for the clicked day
             displayEvents(eventsData, dayDate);
         });
-        
+
         weekContainer.appendChild(dayDiv);
     }
 }
@@ -202,8 +216,8 @@ function laterEvent(card) {
 
 
 function displayFutureEvents(events) {
-    const importantEventsList = document.getElementById('important-events-list'); 
-    importantEventsList.innerHTML = ''; 
+    const importantEventsList = document.getElementById('important-events-list');
+    importantEventsList.innerHTML = '';
     const upcomingEvents = filterAndSortImportantEvents(events, new Date()).slice(0, 4);
 
     // Create a structured list of event details
@@ -211,13 +225,13 @@ function displayFutureEvents(events) {
         const eventStart = new Date(event.start);
         const eventEnd = new Date(event.end);
 
-        const dayNumber = eventStart.getDate(); 
-        const dayName = eventStart.toLocaleString('default', { weekday: 'short' }); 
-        const location = event.location.name || 'N/A'; 
+        const dayNumber = eventStart.getDate();
+        const dayName = eventStart.toLocaleString('default', { weekday: 'short' });
+        const location = event.location.name || 'N/A';
 
         // Create a new div for each event
         const eventDiv = document.createElement('div');
-        eventDiv.classList.add('event-item', 'my-2'); 
+        eventDiv.classList.add('event-item', 'my-2');
         eventDiv.innerHTML = `
             <div class="event-date">
                 <strong>${dayNumber}</strong>
@@ -257,7 +271,7 @@ function filterAndSortTodayEvents(events, selectedDate) {
 
     return events.events
         .filter(event => {
-            const eventStart = new Date(event.start).getTime(); 
+            const eventStart = new Date(event.start).getTime();
             return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
@@ -274,8 +288,8 @@ function filterAndSortImportantEvents(events, currentDate) {
                 eventStart > tomorrow &&
                 eventStart <= DaysAhead &&
                 event.category.some(
-                    cat => cat.name === 'Important' || 
-                    cat.name === 'Scholarly Resources'
+                    cat => cat.name === 'Important' ||
+                        cat.name === 'Scholarly Resources'
                 )
             );
         })

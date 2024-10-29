@@ -24,6 +24,9 @@ body {
     html {
         font-size: 14px; 
     }
+    #qrcode {
+        display: none; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -31,6 +34,10 @@ body {
         font-size: 12px; 
     }
 }
+
+
+
+
 
 
 /* ========================= */
@@ -54,8 +61,6 @@ header {
 }
 
 .library-header img {
-    max-width: 100%;
-    height: auto;
     max-height: 4rem;
 }
 
