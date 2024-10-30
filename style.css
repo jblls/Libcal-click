@@ -43,12 +43,19 @@ body {
         border-radius: 5px; /* Rounded corners */
         padding: 5px 10px; /* Button padding */
         text-decoration: none; /* Remove underline */
+        margin-right: 1rem;
     }
 
     .qr-button:hover {
         background-color: #0056b3; /* Darker color on hover */
     }
 
+    .card-title {
+        white-space: nowrap; /* Prevents text wrapping */
+        overflow: hidden; /* Hides any overflowing text */
+        text-overflow: ellipsis; /* Adds ellipsis (...) to indicate overflow */
+        max-width: 10rem; /* Set the maximum width of the title */
+    }
 
 }
 
@@ -68,10 +75,16 @@ body {
 
 
 .qr_event {
-    position: absolute;
-    right: 10rem;
-    bottom: 0.7rem;
+    padding-right: 5rem;
 }
+
+
+.card {
+    flex-direction: row;
+    align-items: center;
+}
+
+
 
 
 /* ========================= */
@@ -179,13 +192,13 @@ header {
     background-color: rgba(242, 235, 204, 0.39) !important;
 }
 
+.card-title {
+    font-weight: bold;
+}
+
 .card-body {
     padding-top: 0.4375rem; /* 7px */
     padding-bottom: 0.3125rem; /* 5px */
-}
-
-.card-title {
-    font-weight: bold;
 }
 
 .happening-soon,
@@ -198,6 +211,7 @@ header {
     font-weight: bold;
     border-radius: 0.1875rem; /* 3px */
     z-index: 1;
+    align-self: flex-start;
 }
 
 .happening-soon {

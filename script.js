@@ -193,7 +193,7 @@ function createEventCard(event, selectedDate) {
     const timeDiff = eventStartDate - selectedDate;
 
     const card = document.createElement('div');
-    card.classList.add('event-item', 'mb-3', 'shadow-sm', 'bg-light');
+    card.classList.add('card', 'mb-3', 'shadow-sm', 'bg-light');
     card.innerHTML = `
         <div class="card-body">
             <h5 class="card-title">${event.title}</h5> 
@@ -204,7 +204,7 @@ function createEventCard(event, selectedDate) {
 
         <div id="qrcode_${event.id}" class="qr_event"></div>
         <a href="${event.url.public}" target="_blank" class="qr-button">
-        <span style="margin-left: 5px;">Event URL</span>
+        <span>Event URL</span>
         </a>
     `;
 
@@ -254,16 +254,16 @@ function displayFutureEvents(events) {
                 </div>
             </div>
             
-            <div id="qrcode_${event.id}" class="qr_future"></div>
+            <div id="qrcode_future_${event.id}" class="qr_future"></div>
             <a href="${event.url.public}" target="_blank" class="qr-button">
-            <span style="margin-left: 5px;">Event URL</span>
+            <span>Event URL</span>
             </a>
         `;
 
         importantEventsList.appendChild(eventDiv);
 
         // Generate QR code for the specific event URL
-        genQRCode(`qrcode_${event.id}`, event.url.public);
+        genQRCode(`qrcode_future_${event.id}`, event.url.public);
 
     });
 }
