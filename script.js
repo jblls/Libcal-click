@@ -2,7 +2,7 @@ let lastData = null; // Variable to store the last fetched data
 let eventsData = null; // Declare a variable to store the fetched events
 
 
-function generateQRCode(elementId, url = window.location.href) {
+function genQRCode(elementId, url) {
     const element = document.getElementById(elementId);
 
     // Clear any existing QR code if present
@@ -13,7 +13,7 @@ function generateQRCode(elementId, url = window.location.href) {
         height: 70
     });
 }
-generateQRCode("qrcode");
+genQRCode("qrcode", window.location.href);
 
 
 // Format time to display only hours and minutes
@@ -163,7 +163,12 @@ function displayEvents(events, selectedDate) {
             if (isToday) {
                 timeDiff > 0 && timeDiff <= 7200000 ? highlightEvent(card) : laterEvent(card);
             }
+            
+            // Generate QR code for the specific event URL
+            genQRCode(`qrcode_${event.id}`, event.url.public);
         });
+        
+        
     }
 
 }
@@ -188,7 +193,7 @@ function createEventCard(event, selectedDate) {
     const timeDiff = eventStartDate - selectedDate;
 
     const card = document.createElement('div');
-    card.classList.add('event-card', 'card', 'mb-3', 'shadow-sm', 'bg-light');
+    card.classList.add('event-item', 'mb-3', 'shadow-sm', 'bg-light');
     card.innerHTML = `
         <div class="card-body">
             <h5 class="card-title">${event.title}</h5> 
@@ -196,6 +201,11 @@ function createEventCard(event, selectedDate) {
             <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
             <p class="card-text"><span class="label">When:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
         </div>
+
+        <div id="qrcode_${event.id}" class="qr_event"></div>
+        <a href="${event.url.public}" target="_blank" class="qr-button">
+        <span style="margin-left: 5px;">Event URL</span>
+        </a>
     `;
 
     return { card, timeDiff };
@@ -243,9 +253,18 @@ function displayFutureEvents(events) {
                     ${formatTime(eventStart)} - ${formatTime(eventEnd)} &nbsp;&nbsp; | &nbsp;&nbsp; ${event.campus.name} &nbsp;&nbsp; | &nbsp;&nbsp; ${location}
                 </div>
             </div>
+            
+            <div id="qrcode_${event.id}" class="qr_future"></div>
+            <a href="${event.url.public}" target="_blank" class="qr-button">
+            <span style="margin-left: 5px;">Event URL</span>
+            </a>
         `;
 
         importantEventsList.appendChild(eventDiv);
+
+        // Generate QR code for the specific event URL
+        genQRCode(`qrcode_${event.id}`, event.url.public);
+
     });
 }
 

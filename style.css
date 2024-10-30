@@ -27,7 +27,38 @@ body {
     #qrcode {
         display: none; 
     }
+    .qr_event {
+        display: none; 
+    }
+    .qr_future {
+        display: none; 
+    }
+
+
+    .qr-button {
+        display: inline-flex; /* Align QR code and text */
+        align-items: center; /* Center vertically */
+        background-color: #738ba5; /* Button background color */
+        color: white; /* Text color */
+        border-radius: 5px; /* Rounded corners */
+        padding: 5px 10px; /* Button padding */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .qr-button:hover {
+        background-color: #0056b3; /* Darker color on hover */
+    }
+
+
 }
+
+
+@media (min-width: 768px) {
+    .qr-button {
+        display: none; 
+    }
+}
+
 
 @media (max-width: 480px) {
     html {
@@ -36,8 +67,11 @@ body {
 }
 
 
-
-
+.qr_event {
+    position: absolute;
+    right: 10rem;
+    bottom: 0.7rem;
+}
 
 
 /* ========================= */
@@ -156,7 +190,6 @@ header {
 
 .happening-soon,
 .later-today {
-    position: absolute;
     top: 0.625rem; /* 10px */
     right: 0.625rem; /* 10px */
     color: #000000;
