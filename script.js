@@ -149,7 +149,7 @@ function displayEvents(events, selectedDate) {
     eventContainer.innerHTML = '';
 
     // Get up to 10 relevant events, for Today or Future days,
-    //depending on the selected date
+    // depending on the selected date
     const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 5);
 
     if (relevantEvents.length === 0) {
@@ -196,10 +196,12 @@ function createEventCard(event, selectedDate) {
     card.classList.add('card', 'mb-3', 'shadow-sm', 'bg-light');
     card.innerHTML = `
         <div class="card-body">
+        <div>
             <h5 class="card-title">${event.title}</h5> 
             <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>
             <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
             <p class="card-text"><span class="label">When:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
+        </div>
         </div>
 
         <div id="qrcode_${event.id}" class="qr_event"></div>
@@ -216,6 +218,9 @@ function createEventCard(event, selectedDate) {
 function highlightEvent(card) {
     card.classList.add('highlight-card');
     card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
+
+    //const bodyElement = card.querySelector('.highlight-card');
+    //bodyElement.innerHTML += `<div class="happening-soon">Happening soon</div>`;
 }
 
 // Add Later today little box
