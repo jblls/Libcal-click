@@ -201,17 +201,17 @@ header {
     padding-bottom: 0.3125rem; /* 5px */
 }
 
-.happening-soon,
-.later-today {
-    top: 0.625rem; /* 10px */
-    right: 0.625rem; /* 10px */
+.happening-soon, .later-today {
+    top: 0;
+    right: 0px;
     color: #000000;
-    padding: 0.5625rem; /* 9px */
-    font-size: 0.75rem; /* 12px */
+    padding: 0.15rem;
+    padding-left: 0.3rem;
+    font-size: 0.5rem;
     font-weight: bold;
-    border-radius: 0.1875rem; /* 3px */
-    z-index: 1;
-    align-self: flex-start;
+    border-radius: 0.3rem;
+    position: absolute;
+    padding-right: 0.3rem;
 }
 
 .happening-soon {
