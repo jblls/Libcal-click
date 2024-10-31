@@ -54,7 +54,14 @@ body {
         white-space: nowrap; /* Prevents text wrapping */
         overflow: hidden; /* Hides any overflowing text */
         text-overflow: ellipsis; /* Adds ellipsis (...) to indicate overflow */
-        max-width: 10rem; /* Set the maximum width of the title */
+        max-width: 15rem; /* Set the maximum width of the title */
+    }
+    
+    .event-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 15rem;
     }
 
 }
