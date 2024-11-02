@@ -1,7 +1,6 @@
 let lastData = null; // Variable to store the last fetched data
 let eventsData = null; // Declare a variable to store the fetched events
 
-
 function genQRCode(elementId, url) {
     const element = document.getElementById(elementId);
 
@@ -13,7 +12,7 @@ function genQRCode(elementId, url) {
         height: 70
     });
 }
-genQRCode("qrcode", window.location.href);
+//genQRCode("qrcode", window.location.href);
 
 
 // Format time to display only hours and minutes
@@ -142,7 +141,7 @@ function displayWeek() {
 
 // Display event cards and highlight the closest event
 function displayEvents(events, selectedDate) {
-    const eventContainer = document.getElementById('event-container');
+    const eventContainer = document.getElementById('carousel');
     const isToday = selectedDate.toDateString() === new Date().toDateString();
 
     // Clear existing content
@@ -150,10 +149,11 @@ function displayEvents(events, selectedDate) {
 
     // Get up to 10 relevant events, for Today or Future days,
     // depending on the selected date
-    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 5);
+    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 10);
 
     if (relevantEvents.length === 0) {
         eventContainer.appendChild(createNoEventsCard());
+        genQRCode("noevents", "https://www.library.unsw.edu.au/about-unsw-library/whats-on");
     } else {
         relevantEvents.forEach(event => {
             const { card, timeDiff } = createEventCard(event, selectedDate);
@@ -168,7 +168,9 @@ function displayEvents(events, selectedDate) {
             genQRCode(`qrcode_${event.id}`, event.url.public);
         });
         
+
         
+  
     }
 
 }
@@ -177,12 +179,15 @@ function displayEvents(events, selectedDate) {
 // Function to create the "No Events Today" card
 function createNoEventsCard() {
     const card = document.createElement('div');
+    card.classList.add('no-events');
     card.innerHTML = `
         <div class="no-events-text">
         <i class="bi bi-emoji-frown"></i>
-        No events today
+        No events at Main Library
         </div>
-    `;
+        <div id="noevents">
+        </div>
+    `;    
     return card;
 }
 
@@ -321,14 +326,42 @@ function filterAndSortImportantEvents(events, currentDate) {
 }
 
 
+const visibleCards = 5;
+let currentStartIndex = 0;
+function updateCarousel() {
+    const cards = document.querySelectorAll('.card');
+    const totalCards = cards.length;
 
+    if (totalCards > visibleCards){   
+ 
+        const carousel = document.querySelector('#carousel');
+        const card = document.querySelector('.card.mb-3.shadow-sm.bg-light');
+        const cardHeight = card.offsetHeight;
+        const computedStyle = window.getComputedStyle(card);
+        const marginTop = parseFloat(computedStyle.marginTop);
+        const marginBottom = parseFloat(computedStyle.marginBottom);
+        const totalHeight = cardHeight + marginTop + marginBottom;
 
+        carousel.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
+        // Increment index for next rotation, cycling back if needed
+        currentStartIndex = (currentStartIndex + 1) % (totalCards - visibleCards + 1); 
+
+ 
+    }  
+    else{
+        carousel.style.transform = `translateY(0px)`;
+    }  
+
+}
 
 // Initialize the page and refresh every 10 minutes
 function init() {
     checkForUpdates(); // Fetch the events on initial load
     displayMonthHeader();
     displayWeek();
+        
+    // Only set interval if there are more than 5 cards
+    setInterval(updateCarousel, 5000);
 
     // Check for updates every 1 minutes (60,000 milliseconds)
     setInterval(checkForUpdates, 60000);

@@ -176,15 +176,28 @@ header {
 /* ========================= */
 
 #event-container {
-    height: 43.75rem; /* 700px */
-    overflow-y: auto;
+    height: calc(5 * (8.5rem)); /* 136px/16px = 8.5rem */
+    overflow: hidden;
+}
+.carousel {
+    display: flex;
+    flex-direction: column;
+    transition: transform 2s ease;
+  }
+
+
+
+.no-events {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .no-events-text {
-    font-size: 2.5rem; /* 40px */
+    font-size: 2.0rem; /* 40px */
     font-weight: bold;
     color: rgb(161, 161, 161);
-    margin: 9.375rem 0; /* 150px */
+    margin: 9.375rem 0 3rem 0; /* 150px */
     display: flex;
     align-items: center;
     justify-content: center;
