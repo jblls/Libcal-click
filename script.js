@@ -300,8 +300,10 @@ function filterAndSortTodayEvents(events, selectedDate) {
 
     return events.events
         .filter(event => {
-            const eventStart = new Date(event.start).getTime();
-            return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
+            //const eventStart = new Date(event.start).getTime();
+            //return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
+            const eventEnd = new Date(event.end).getTime();
+            return eventEnd >= startOfDay && eventEnd <= endOfDay; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
