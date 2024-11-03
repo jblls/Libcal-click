@@ -133,6 +133,9 @@ function displayWeek() {
 
             // Show events for the clicked day
             displayEvents(eventsData, dayDate);
+
+            clearDots();
+            initializeDots()
         });
 
         weekContainer.appendChild(dayDiv);
@@ -163,14 +166,13 @@ function displayEvents(events, selectedDate) {
             if (isToday) {
                 timeDiff > 0 && timeDiff <= 7200000 ? highlightEvent(card) : laterEvent(card);
             }
-            
+
             // Generate QR code for the specific event URL
             genQRCode(`qrcode_${event.id}`, event.url.public);
         });
-        
 
-        
-  
+
+
     }
 
 }
@@ -187,7 +189,7 @@ function createNoEventsCard() {
         </div>
         <div id="noevents">
         </div>
-    `;    
+    `;
     return card;
 }
 
@@ -327,7 +329,7 @@ function filterAndSortImportantEvents(events, currentDate) {
         .sort((a, b) => new Date(a.start) - new Date(b.start));
 }
 
-
+/*
 const visibleCards = 5;
 let currentStartIndex = 0;
 function updateCarousel() {
@@ -355,13 +357,85 @@ function updateCarousel() {
     }  
 
 }
+*/
+
+const visibleCards = 5;
+let currentStartIndex = 0;
+
+function clearDots() {
+    const indicatorsContainer = document.getElementById('carousel-indicators');
+    indicatorsContainer.innerHTML = ''; // Clears all existing dot elements
+}
+
+function initializeDots() {
+    const totalCards = document.querySelectorAll('.card').length;
+    const indicatorsContainer = document.getElementById('carousel-indicators');
+    const totalDots = totalCards - visibleCards;
+
+    // Generate dots
+    if (totalCards > visibleCards) {
+        for (let i = 0; i < totalDots + 1; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active'); // Set the first dot as active
+            indicatorsContainer.appendChild(dot);
+        }
+    }
+}
+
+function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[currentStartIndex].classList.add('active');
+}
+
+function updateCarousel() {
+    const cards = document.querySelectorAll('.card');
+    const totalCards = cards.length;
+
+
+    if (totalCards > visibleCards) {
+        const carousel = document.querySelector('#carousel');
+        const card = document.querySelector('.card.mb-3.shadow-sm.bg-light');
+        const cardHeight = card.offsetHeight;
+        const computedStyle = window.getComputedStyle(card);
+        const marginTop = parseFloat(computedStyle.marginTop);
+        const marginBottom = parseFloat(computedStyle.marginBottom);
+        const totalHeight = cardHeight + marginTop + marginBottom;
+
+        // Move the carousel
+        carousel.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
+
+        // Update dots
+        updateDots();
+
+        // Increment index for next rotation, cycling back if needed
+        currentStartIndex = (currentStartIndex + 1) % (totalCards - visibleCards + 1);
+    } else {
+        // Reset the carousel position if not enough cards
+        carousel.style.transform = `translateY(0px)`;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Initialize the page and refresh every 10 minutes
 function init() {
     checkForUpdates(); // Fetch the events on initial load
     displayMonthHeader();
     displayWeek();
-        
+
     // Only set interval if there are more than 5 cards
     setInterval(updateCarousel, 5000);
 

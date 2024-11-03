@@ -185,6 +185,26 @@ header {
     transition: transform 2s ease;
   }
 
+  .indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .indicators .dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+  }
+  
+  .indicators .dot.active {
+    background-color: #333;
+  }
+
 
 
 .no-events {
