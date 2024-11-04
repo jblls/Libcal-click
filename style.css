@@ -98,8 +98,19 @@ body {
 /*         Header           */
 /* ========================= */
 
+.background-shape-container{
+    position: absolute;
+    z-index: -1;
+    top: -5%;
+    left: -10%;
+    width: 30%;
+}
+.background-shape {
+    fill: #ffdc00;
+}
+
 header {
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     padding: 0.625rem; /* 10px */
     border-bottom: 0.075rem solid #c2c2c2; /* 1.2px */
     margin-bottom: 1.25rem; /* 20px */
@@ -153,7 +164,7 @@ header {
 }
 
 .calendar-container {
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     padding: 0;
     width: 100%;
     margin: 0 auto;
@@ -229,7 +240,7 @@ header {
 }
 
 .highlight-card {
-    background-color: rgba(242, 235, 204, 0.39) !important;
+    /*background-color: rgba(242, 235, 204, 0) !important;*/
 }
 
 .card-title {
@@ -241,20 +252,24 @@ header {
     padding-bottom: 0.3125rem; /* 5px */
 }
 
-.happening-soon, .later-today {
+.title-container {
+    display: flex;
+    align-items: flex-start; /* Aligns items vertically centered */
+    gap: 10px; /* Adjust the gap between title and "Happening soon" */
+}
+
+.happening-soon, .later-today, .happening-now {
     top: 0;
     right: 0px;
     color: #000000;
-    padding: 0.15rem;
     padding-left: 0.3rem;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     font-weight: bold;
     border-radius: 0.3rem;
-    position: absolute;
     padding-right: 0.3rem;
 }
 
-.happening-soon {
+.happening-soon, .happening-now {
     background-color: rgb(255, 228, 105);
 }
 
@@ -282,7 +297,7 @@ header {
 
 footer {
     height: 27.56rem; /* 441px */
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 
 .important-events-title {
@@ -294,7 +309,7 @@ footer {
 
 .event-item {
     display: flex;
-    background-color: #333;
+    background-color: #4b4b4b;
     padding: 0.625rem; /* 10px */
     align-items: center;
     border-radius: 0.3125rem; /* 5px */

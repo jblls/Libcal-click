@@ -73,12 +73,18 @@ async function checkForUpdates() {
         lastData = newData; // Update lastData to the new data
         eventsData = newData; // Store the fetched events for later use
 
-        // Display events only if data has changed
-        displayEvents(newData, new Date()); // Display events for today
-        displayFutureEvents(newData); // Display future events
     } else {
         console.log('No change in data.');
     }
+
+    // Display events only if data has changed
+    displayEvents(newData, new Date()); // Display events for today
+    displayFutureEvents(newData); // Display future events
+
+    clearDots();
+    initializeDots();
+
+
 }
 
 // Display the current Month header with the icon
@@ -135,7 +141,7 @@ function displayWeek() {
             displayEvents(eventsData, dayDate);
 
             clearDots();
-            initializeDots()
+            initializeDots();
         });
 
         weekContainer.appendChild(dayDiv);
@@ -162,9 +168,15 @@ function displayEvents(events, selectedDate) {
             const { card, timeDiff } = createEventCard(event, selectedDate);
             eventContainer.appendChild(card);
 
-            // Highlight or label event only if it's today
+            // Highlight or label event only if it's today, less than 2hrs
             if (isToday) {
-                timeDiff > 0 && timeDiff <= 7200000 ? highlightEvent(card) : laterEvent(card);
+                if (timeDiff < 0) {
+                    nowEvent(card); // Call nowEvent if timeDiff is less than 0
+                } else if (timeDiff > 0 && timeDiff <= 7200000) {
+                    highlightEvent(card); // Call highlightEvent if timeDiff is between 0 and 2 hours
+                } else {
+                    laterEvent(card); // Call laterEvent for other cases
+                }
             }
 
             // Generate QR code for the specific event URL
@@ -224,16 +236,83 @@ function createEventCard(event, selectedDate) {
 // and Happening soon little box
 function highlightEvent(card) {
     card.classList.add('highlight-card');
-    card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
+    //card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
 
-    //const bodyElement = card.querySelector('.highlight-card');
-    //bodyElement.innerHTML += `<div class="happening-soon">Happening soon</div>`;
+    // Create a container for the title and "Happening soon" elements
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('title-container');
+
+    // Move the title into the container
+    const titleElement = card.querySelector('.card-title');
+    if (titleElement) {
+        titleContainer.appendChild(titleElement);
+    }
+
+    // Create and add the "Happening soon" element
+    const happeningSoonElement = document.createElement('div');
+    happeningSoonElement.classList.add('happening-soon');
+    happeningSoonElement.textContent = 'Happening soon';
+    titleContainer.appendChild(happeningSoonElement);
+
+    // Insert the title container at the beginning of the card-body
+    const cardBody = card.querySelector('.card-body > div');
+    if (cardBody) {
+        cardBody.prepend(titleContainer);
+    }
+}
+
+// Add Later today little box
+function nowEvent(card) {
+    card.classList.add('now-card');
+
+    // Create a container for the title and "Happening now" elements
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('title-container');
+
+    // Move the title into the container
+    const titleElement = card.querySelector('.card-title');
+    if (titleElement) {
+        titleContainer.appendChild(titleElement);
+    }
+
+    // Create and add the "Happening soon" element
+    const happeningSoonElement = document.createElement('div');
+    happeningSoonElement.classList.add('happening-now');
+    happeningSoonElement.textContent = 'Happening now';
+    titleContainer.appendChild(happeningSoonElement);
+
+    // Insert the title container at the beginning of the card-body
+    const cardBody = card.querySelector('.card-body > div');
+    if (cardBody) {
+        cardBody.prepend(titleContainer);
+    }
 }
 
 // Add Later today little box
 function laterEvent(card) {
     card.classList.add('later-card');
-    card.innerHTML += `<div class="later-today">Later today</div>`;
+
+    // Create a container for the title and "Later today" elements
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('title-container');
+
+    // Move the title into the container
+    const titleElement = card.querySelector('.card-title');
+    if (titleElement) {
+        titleContainer.appendChild(titleElement);
+    }
+
+    // Create and add the "Happening soon" element
+    const happeningSoonElement = document.createElement('div');
+    happeningSoonElement.classList.add('later-today');
+    happeningSoonElement.textContent = 'Later today';
+    titleContainer.appendChild(happeningSoonElement);
+
+    // Insert the title container at the beginning of the card-body
+    const cardBody = card.querySelector('.card-body > div');
+    if (cardBody) {
+        cardBody.prepend(titleContainer);
+    }
 }
 
 
@@ -329,35 +408,6 @@ function filterAndSortImportantEvents(events, currentDate) {
         .sort((a, b) => new Date(a.start) - new Date(b.start));
 }
 
-/*
-const visibleCards = 5;
-let currentStartIndex = 0;
-function updateCarousel() {
-    const cards = document.querySelectorAll('.card');
-    const totalCards = cards.length;
-
-    if (totalCards > visibleCards){   
- 
-        const carousel = document.querySelector('#carousel');
-        const card = document.querySelector('.card.mb-3.shadow-sm.bg-light');
-        const cardHeight = card.offsetHeight;
-        const computedStyle = window.getComputedStyle(card);
-        const marginTop = parseFloat(computedStyle.marginTop);
-        const marginBottom = parseFloat(computedStyle.marginBottom);
-        const totalHeight = cardHeight + marginTop + marginBottom;
-
-        carousel.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
-        // Increment index for next rotation, cycling back if needed
-        currentStartIndex = (currentStartIndex + 1) % (totalCards - visibleCards + 1); 
-
- 
-    }  
-    else{
-        carousel.style.transform = `translateY(0px)`;
-    }  
-
-}
-*/
 
 const visibleCards = 5;
 let currentStartIndex = 0;
