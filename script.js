@@ -217,7 +217,7 @@ function createEventCard(event, selectedDate) {
         <div class="card-body">
         <div>
             <h5 class="card-title">${event.title}</h5> 
-            <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>
+            <!--   <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>   -->
             <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
             <p class="card-text"><span class="label">When:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
         </div>
@@ -341,7 +341,7 @@ function displayFutureEvents(events) {
             <div class="event-details">
                 <div class="event-title">${event.title}</div>
                 <div class="event-time-location">
-                    ${formatTime(eventStart)} - ${formatTime(eventEnd)} &nbsp;&nbsp; | &nbsp;&nbsp; ${event.campus.name} &nbsp;&nbsp; | &nbsp;&nbsp; ${location}
+                    ${formatTime(eventStart)} - ${formatTime(eventEnd)} &nbsp;&nbsp; | &nbsp;&nbsp; ${location}
                 </div>
             </div>
             
@@ -369,7 +369,9 @@ function filterAndSortFutureEvents(events, selectedDate) {
     return events.events
         .filter(event => {
             const eventStart = new Date(event.start).getTime();
-            return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
+            return eventStart >= startOfDay && 
+            eventStart <= endOfDay && 
+            event.campus.name === 'Main Library'; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -384,7 +386,9 @@ function filterAndSortTodayEvents(events, selectedDate) {
             //const eventStart = new Date(event.start).getTime();
             //return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
             const eventEnd = new Date(event.end).getTime();
-            return eventEnd >= startOfDay && eventEnd <= endOfDay; // if Event is today
+            return eventEnd >= startOfDay && 
+            eventEnd <= endOfDay && 
+            event.campus.name === 'Main Library'; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -399,6 +403,7 @@ function filterAndSortImportantEvents(events, currentDate) {
             return (
                 eventStart > tomorrow &&
                 eventStart <= DaysAhead &&
+                event.campus.name === 'Main Library' &&
                 event.category.some(
                     cat => cat.name === 'Important' ||
                         cat.name === 'Scholarly Resources'
@@ -487,7 +492,7 @@ function init() {
     displayWeek();
 
     // Only set interval if there are more than 5 cards
-    setInterval(updateCarousel, 5000);
+    setInterval(updateCarousel, 15000);
 
     // Check for updates every 1 minutes (60,000 milliseconds)
     setInterval(checkForUpdates, 60000);

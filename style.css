@@ -14,6 +14,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.container-fluid {
+    --bs-gutter-x: 15rem;
+    padding-right: calc(var(--bs-gutter-x)* .5);
+    padding-left: calc(var(--bs-gutter-x)* .5);
+}
+
 @media (min-width: 2150px) {
     html {
         font-size: 20px; 
@@ -101,9 +107,9 @@ body {
 .background-shape-container{
     position: absolute;
     z-index: -1;
-    top: -5%;
-    left: -10%;
-    width: 30%;
+    top: -8rem;
+    left: -10rem;
+    width: 25rem;
 }
 .background-shape {
     fill: #ffdc00;
@@ -296,8 +302,8 @@ header {
 /* ========================= */
 
 footer {
-    height: 27.56rem; /* 441px */
-    /*overflow-y: auto;*/
+    height: 31rem;
+    padding-top: 1rem;
 }
 
 .important-events-title {
