@@ -81,9 +81,11 @@ async function checkForUpdates() {
     displayEvents(newData, new Date()); // Display events for today
     displayFutureEvents(newData); // Display future events
 
-    clearDots();
-    initializeDots();
+    clearDots(document.getElementById('carousel-indicators'));
+    initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
 
+    clearDots(document.getElementById('carousel-indicators-footer'));
+    initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
 
 }
 
@@ -140,8 +142,8 @@ function displayWeek() {
             // Show events for the clicked day
             displayEvents(eventsData, dayDate);
 
-            clearDots();
-            initializeDots();
+            clearDots(document.getElementById('carousel-indicators'));
+            initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
         });
 
         weekContainer.appendChild(dayDiv);
@@ -317,9 +319,9 @@ function laterEvent(card) {
 
 
 function displayFutureEvents(events) {
-    const importantEventsList = document.getElementById('important-events-list');
+    const importantEventsList = document.getElementById('carousel-footer');
     importantEventsList.innerHTML = '';
-    const upcomingEvents = filterAndSortImportantEvents(events, new Date()).slice(0, 4);
+    const upcomingEvents = filterAndSortImportantEvents(events, new Date()).slice(0, 10);
 
     // Create a structured list of event details
     upcomingEvents.forEach(event => {
@@ -419,16 +421,17 @@ function filterAndSortImportantEvents(events, currentDate) {
 
 
 const visibleCards = 5;
+const visibleCards_footer = 3;
 let currentStartIndex = 0;
+let currentStartIndex_footer = 0;
 
-function clearDots() {
-    const indicatorsContainer = document.getElementById('carousel-indicators');
+function clearDots(indicatorsContainer) {
     indicatorsContainer.innerHTML = ''; // Clears all existing dot elements
 }
 
-function initializeDots() {
-    const totalCards = document.querySelectorAll('.card').length;
-    const indicatorsContainer = document.getElementById('carousel-indicators');
+function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
+    const totalCards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV').length;
+    console.log(totalCards);
     const totalDots = totalCards - visibleCards;
 
     // Generate dots
@@ -442,37 +445,37 @@ function initializeDots() {
     }
 }
 
-function updateDots() {
-    const dots = document.querySelectorAll('.dot');
+function updateDots(indicatorsContainer, currentStartIndex) {
+    const dots = indicatorsContainer.querySelectorAll('.dot');
     dots.forEach(dot => dot.classList.remove('active'));
     dots[currentStartIndex].classList.add('active');
 }
 
-function updateCarousel() {
-    const cards = document.querySelectorAll('.card');
+function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
+    const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
     const totalCards = cards.length;
-
+    console.log(totalCards);
 
     if (totalCards > visibleCards) {
-        const carousel = document.querySelector('#carousel');
-        const card = document.querySelector('.card.mb-3.shadow-sm.bg-light');
+        const card = Array.from(cardContainer.children).find(child => child.tagName === 'DIV');
         const cardHeight = card.offsetHeight;
         const computedStyle = window.getComputedStyle(card);
         const marginTop = parseFloat(computedStyle.marginTop);
         const marginBottom = parseFloat(computedStyle.marginBottom);
         const totalHeight = cardHeight + marginTop + marginBottom;
-
+        console.log(totalHeight);
         // Move the carousel
-        carousel.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
+        cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
 
         // Update dots
-        updateDots();
+        updateDots(indicatorsContainer, currentStartIndex);
 
         // Increment index for next rotation, cycling back if needed
-        currentStartIndex = (currentStartIndex + 1) % (totalCards - visibleCards + 1);
+        return currentStartIndex = (currentStartIndex + 1) % (totalCards - visibleCards + 1);
     } else {
         // Reset the carousel position if not enough cards
         carousel.style.transform = `translateY(0px)`;
+        return 0;
     }
 }
 
@@ -496,7 +499,23 @@ function init() {
     displayWeek();
 
     // Only set interval if there are more than 5 cards
-    setInterval(updateCarousel, 15000);
+    setInterval(() => {
+        currentStartIndex = updateCarousel(
+            document.querySelector('#carousel'),
+            document.getElementById('carousel-indicators'),
+            currentStartIndex,
+            visibleCards
+        );
+    }, 5000);
+
+    setInterval(() => {
+        currentStartIndex_footer = updateCarousel(
+            document.querySelector('#carousel-footer'),
+            document.getElementById('carousel-indicators-footer'),
+            currentStartIndex_footer,
+            visibleCards_footer
+        );
+    }, 5000);
 
     // Check for updates every 1 minutes (60,000 milliseconds)
     setInterval(checkForUpdates, 60000);

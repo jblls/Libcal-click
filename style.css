@@ -18,6 +18,7 @@ body {
     --bs-gutter-x: 15rem;
     padding-right: calc(var(--bs-gutter-x)* .5);
     padding-left: calc(var(--bs-gutter-x)* .5);
+    overflow: hidden;
 }
 
 @media (min-width: 2150px) {
@@ -196,7 +197,17 @@ header {
     height: calc(5 * (8.5rem)); /* 136px/16px = 8.5rem */
     overflow: hidden;
 }
+#important-events-list {
+    height: calc(5 * (8.5rem)); /* 136px/16px = 8.5rem */
+    overflow: hidden;
+}
 .carousel {
+    display: flex;
+    flex-direction: column;
+    transition: transform 2s ease;
+  }
+
+  .carousel-footer {
     display: flex;
     flex-direction: column;
     transition: transform 2s ease;
@@ -302,7 +313,7 @@ header {
 /* ========================= */
 
 footer {
-    height: 31rem;
+    height: 33rem;
     padding-top: 1rem;
 }
 
