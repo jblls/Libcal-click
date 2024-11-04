@@ -371,7 +371,8 @@ function filterAndSortFutureEvents(events, selectedDate) {
             const eventStart = new Date(event.start).getTime();
             return eventStart >= startOfDay && 
             eventStart <= endOfDay && 
-            event.campus.name === 'Main Library'; // if Event is today
+            event.campus.name === 'Main Library' &&
+            event.location.name !== ''; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -388,7 +389,8 @@ function filterAndSortTodayEvents(events, selectedDate) {
             const eventEnd = new Date(event.end).getTime();
             return eventEnd >= startOfDay && 
             eventEnd <= endOfDay && 
-            event.campus.name === 'Main Library'; // if Event is today
+            event.campus.name === 'Main Library' &&
+            event.location.name !== ''; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -404,8 +406,10 @@ function filterAndSortImportantEvents(events, currentDate) {
                 eventStart > tomorrow &&
                 eventStart <= DaysAhead &&
                 event.campus.name === 'Main Library' &&
+                event.location.name !== '' &&
                 event.category.some(
-                    cat => cat.name === 'Important' ||
+                    cat => 
+                        cat.name === 'Important' ||
                         cat.name === 'Scholarly Resources'
                 )
             );
