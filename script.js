@@ -77,6 +77,8 @@ async function checkForUpdates() {
         console.log('No change in data.');
     }
 
+    console.log('CheckForUpdates();');
+
     // Display events only if data has changed
     displayEvents(newData, new Date()); // Display events for today
     displayFutureEvents(newData); // Display future events
@@ -147,6 +149,7 @@ function displayWeek() {
 
             clearDots(document.getElementById('carousel-indicators'));
             initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
+            updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
         });
 
         weekContainer.appendChild(dayDiv);
@@ -456,7 +459,7 @@ function updateDots(indicatorsContainer, currentStartIndex) {
 function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
     const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
     const totalCards = cards.length;
-    
+
 
     if (totalCards > visibleCards) {
         const card = Array.from(cardContainer.children).find(child => child.tagName === 'DIV');
@@ -465,9 +468,11 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
         const marginTop = parseFloat(computedStyle.marginTop);
         const marginBottom = parseFloat(computedStyle.marginBottom);
         const totalHeight = cardHeight + marginTop + marginBottom;
-       
+        
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
+
+    
 
         // Update dots
         updateDots(indicatorsContainer, currentStartIndex);
@@ -542,7 +547,11 @@ function init() {
     }, 5000);
 
     // Check for updates every 1 minutes (60,000 milliseconds)
-    setInterval(checkForUpdates, 60000);
+    setInterval(() => {
+        checkForUpdates();
+        displayMonthHeader();
+        displayWeek();
+    }, 60000);
 
 
     // Call the function when the page loads
