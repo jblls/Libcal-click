@@ -87,6 +87,9 @@ async function checkForUpdates() {
     clearDots(document.getElementById('carousel-indicators-footer'));
     initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
 
+    updateElementHeight('.event-item', '#important-events-list', visibleCards_footer); // For event items
+    updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
+
 }
 
 // Display the current Month header with the icon
@@ -160,7 +163,7 @@ function displayEvents(events, selectedDate) {
 
     // Get up to 10 relevant events, for Today or Future days,
     // depending on the selected date
-    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 10);
+    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 20);
 
     if (relevantEvents.length === 0) {
         eventContainer.appendChild(createNoEventsCard());
@@ -431,7 +434,6 @@ function clearDots(indicatorsContainer) {
 
 function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
     const totalCards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV').length;
-    console.log(totalCards);
     const totalDots = totalCards - visibleCards;
 
     // Generate dots
@@ -454,7 +456,7 @@ function updateDots(indicatorsContainer, currentStartIndex) {
 function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
     const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
     const totalCards = cards.length;
-    console.log(totalCards);
+    
 
     if (totalCards > visibleCards) {
         const card = Array.from(cardContainer.children).find(child => child.tagName === 'DIV');
@@ -463,7 +465,7 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
         const marginTop = parseFloat(computedStyle.marginTop);
         const marginBottom = parseFloat(computedStyle.marginBottom);
         const totalHeight = cardHeight + marginTop + marginBottom;
-        console.log(totalHeight);
+       
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
 
