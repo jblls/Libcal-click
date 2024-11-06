@@ -8,8 +8,8 @@ function genQRCode(elementId, url) {
     element.innerHTML = "";
     new QRCode(element, {
         text: url,
-        width: 70,
-        height: 70
+        width: 90,
+        height: 90
     });
 }
 //genQRCode("qrcode", window.location.href);

@@ -3,7 +3,7 @@
 /* ========================= */
 
 html {
-    font-size: 16px; /* Base root size: 1rem = 16px */
+    font-size: 30px; /* Base root size: 1rem = 16px */
 }
 
 body {
@@ -32,73 +32,6 @@ body {
     overflow: hidden;
 }
 
-@media (min-width: 2150px) {
-    html {
-        font-size: 30px; 
-    }
-}
-
-@media (max-width: 768px) {
-    html {
-        font-size: 14px; 
-    }
-    #qrcode {
-        display: none; 
-    }
-    .qr_event {
-        display: none; 
-    }
-    .qr_future {
-        display: none; 
-    }
-
-
-    .qr-button {
-        display: inline-flex; /* Align QR code and text */
-        align-items: center; /* Center vertically */
-        background-color: #738ba5; /* Button background color */
-        color: white; /* Text color */
-        border-radius: 5px; /* Rounded corners */
-        padding: 5px 10px; /* Button padding */
-        text-decoration: none; /* Remove underline */
-        margin-right: 1rem;
-    }
-
-    .qr-button:hover {
-        background-color: #0056b3; /* Darker color on hover */
-    }
-
-    .card-title {
-        white-space: nowrap; /* Prevents text wrapping */
-        overflow: hidden; /* Hides any overflowing text */
-        text-overflow: ellipsis; /* Adds ellipsis (...) to indicate overflow */
-        max-width: 15rem; /* Set the maximum width of the title */
-    }
-    
-    .event-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 15rem;
-    }
-
-}
-
-
-@media (min-width: 768px) {
-    .qr-button {
-        display: none; 
-    }
-}
-
-
-@media (max-width: 480px) {
-    html {
-        font-size: 12px; 
-    }
-}
-
-
 .qr_event {
     padding-right: 0.625rem;
 }
@@ -108,6 +41,162 @@ body {
     flex-direction: row;
     align-items: center;
 }
+
+
+
+.qr-button {
+    display: none;
+}
+
+#qrcode,
+.qr_event,
+.qr_future {
+    display: block;
+}
+
+.card-title,
+.event-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 45rem;
+}
+
+
+/* Extra-large screens (min-width: 2150px) */
+@media (max-width: 2100px) {
+    html {
+        font-size: 20px;
+    }
+
+    .qr-button {
+        display: none;
+    }
+
+    #qrcode,
+    .qr_event,
+    .qr_future {
+        display: block;
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .card-title,
+    .event-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 40rem;
+    }
+}
+
+
+
+@media (max-width: 1480px) {
+    html {
+        font-size: 12px;
+    }
+    .qr-button {
+        display: none;
+    }
+
+    #qrcode,
+    .qr_event,
+    .qr_future {
+        display: block;
+    }
+
+    .card-title,
+    .event-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 40rem;
+    }
+
+}
+
+@media (max-width: 780px) {
+    html {
+        font-size: 8px;
+    }
+    #qrcode,
+    .qr_event,
+    .qr_future {
+        display: none;
+    }
+
+    .qr-button {
+        display: inline-flex; /* Show button on small screens */
+        align-items: center; /* Center vertically */
+        background-color: #738ba5;
+        color: white;
+        border-radius: 5px;
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-right: 1rem;
+    }
+
+    .qr-button:hover {
+        background-color: #0056b3; /* Darker color on hover */
+    }
+    .card-title,
+    .event-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 35rem;
+    }
+
+}
+
+
+
+@media (max-width: 540px) {
+    html {
+        font-size: 5px;
+    }
+    #qrcode,
+    .qr_event,
+    .qr_future {
+        display: none;
+    }
+
+    .qr-button {
+        display: inline-flex; /* Show button on small screens */
+        align-items: center; /* Center vertically */
+        background-color: #738ba5;
+        color: white;
+        border-radius: 5px;
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-right: 1rem;
+    }
+
+    .qr-button:hover {
+        background-color: #0056b3; /* Darker color on hover */
+    }
+    .card-title,
+    .event-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 25rem;
+    }
+
+}
+
+
+.qr_event img, .qr_future img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+
+
+
 
 
 
