@@ -371,10 +371,10 @@ function filterAndSortFutureEvents(events, selectedDate) {
     return events.events
         .filter(event => {
             const eventStart = new Date(event.start).getTime();
-            return eventStart >= startOfDay && 
-            eventStart <= endOfDay && 
-            event.campus.name === 'Main Library' &&
-            event.location.name !== ''; // if Event is today
+            return eventStart >= startOfDay &&
+                eventStart <= endOfDay &&
+                event.campus.name === 'Main Library' &&
+                event.location.name !== ''; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -389,10 +389,10 @@ function filterAndSortTodayEvents(events, selectedDate) {
             //const eventStart = new Date(event.start).getTime();
             //return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
             const eventEnd = new Date(event.end).getTime();
-            return eventEnd >= startOfDay && 
-            eventEnd <= endOfDay && 
-            event.campus.name === 'Main Library' &&
-            event.location.name !== ''; // if Event is today
+            return eventEnd >= startOfDay &&
+                eventEnd <= endOfDay &&
+                event.campus.name === 'Main Library' &&
+                event.location.name !== ''; // if Event is today
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -410,7 +410,7 @@ function filterAndSortImportantEvents(events, currentDate) {
                 event.campus.name === 'Main Library' &&
                 event.location.name !== '' &&
                 event.category.some(
-                    cat => 
+                    cat =>
                         cat.name === 'Important' ||
                         cat.name === 'Scholarly Resources'
                 )
@@ -420,8 +420,8 @@ function filterAndSortImportantEvents(events, currentDate) {
 }
 
 
-const visibleCards = 5;
-const visibleCards_footer = 3;
+const visibleCards = 10;
+const visibleCards_footer = 5;
 let currentStartIndex = 0;
 let currentStartIndex_footer = 0;
 
@@ -483,8 +483,30 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 
 
 
+function updateElementHeight(elementSelector, containerSelector, multiplier) {
+    // Get the target element
+    const element = document.querySelector(elementSelector);
 
+    if (!element) return; // Exit if element doesn't exist
 
+    // Get the height of the element
+    const elementHeight = element.offsetHeight;
+
+    // Get the computed style of the element to extract margin
+    const computedStyle = window.getComputedStyle(element);
+    const marginTop = parseFloat(computedStyle.marginTop);
+    const marginBottom = parseFloat(computedStyle.marginBottom);
+
+    // Total height including margin
+    const totalHeight = elementHeight + marginTop + marginBottom;
+
+    // Get the target container
+    const container = document.querySelector(containerSelector);
+    if (!container) return; // Exit if container doesn't exist
+
+    // Set the height of the container based on the element's total height and multiplier
+    container.style.height = `${totalHeight * multiplier}px`;
+}
 
 
 
@@ -519,6 +541,23 @@ function init() {
 
     // Check for updates every 1 minutes (60,000 milliseconds)
     setInterval(checkForUpdates, 60000);
+
+
+    // Call the function when the page loads
+    window.addEventListener('load', () => {
+        updateElementHeight('.event-item', '#important-events-list', visibleCards_footer); // For event items
+        updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
+    });
+
+    // Optionally, call the function on resize
+    window.addEventListener('resize', () => {
+        updateElementHeight('.event-item', '#important-events-list', visibleCards_footer); // For event items
+        updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
+    });
+
+
+
+
 }
 
 init();

@@ -14,6 +14,17 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.outside {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+}
+.head {
+    flex: 0, 0, auto;
+}
+.main {
+    flex: 1;
+}
 .container-fluid {
     --bs-gutter-x: 15rem;
     padding-right: calc(var(--bs-gutter-x)* .5);
@@ -23,7 +34,7 @@ body {
 
 @media (min-width: 2150px) {
     html {
-        font-size: 20px; 
+        font-size: 30px; 
     }
 }
 
@@ -89,7 +100,7 @@ body {
 
 
 .qr_event {
-    padding-right: 10px;
+    padding-right: 0.625rem;
 }
 
 
@@ -194,11 +205,10 @@ header {
 /* ========================= */
 
 #event-container {
-    height: calc(5 * (8.5rem)); /* 136px/16px = 8.5rem */
+    /*height: calc(8 * (8.5rem));*/
     overflow: hidden;
 }
 #important-events-list {
-    height: calc(5 * (8.5rem)); /* 136px/16px = 8.5rem */
     overflow: hidden;
 }
 .carousel {
@@ -230,7 +240,7 @@ header {
   }
   
   .indicators .dot.active {
-    background-color: #333;
+    background-color: #ffdc00;
   }
 
 
@@ -313,7 +323,7 @@ header {
 /* ========================= */
 
 footer {
-    height: 33rem;
+    /*height: 33rem;*/
     padding-top: 1rem;
 }
 
