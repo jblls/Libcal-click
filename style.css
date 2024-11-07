@@ -77,7 +77,7 @@ body {
     .qr_event,
     .qr_future {
         display: block;
-        width: 4rem;
+        /*width: 4rem;*/
         height: 4rem;
     }
 

@@ -468,6 +468,7 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
         const marginTop = parseFloat(computedStyle.marginTop);
         const marginBottom = parseFloat(computedStyle.marginBottom);
         const totalHeight = cardHeight + marginTop + marginBottom;
+        console.log('totalHeight = ', totalHeight);
         
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
