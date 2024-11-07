@@ -42,7 +42,6 @@ async function fetchEventData(filePath) {
     } catch (error) {
         console.warn(`Error fetching events from ${filePath}:`, error);
     }
-    console.log(eventData);
     return eventData;
 }
 
@@ -58,7 +57,6 @@ async function getEvents() {
 
         // Combine the two event data arrays
         const eventData = { events: [...eventData1, ...eventData2] };
-        console.log(eventData);
 
         return eventData; // Return the fetched event data
 
@@ -329,7 +327,7 @@ function laterEvent(card) {
 function displayFooterEvents(events) {
     const FooterEventsList = document.getElementById('carousel-footer');
     FooterEventsList.innerHTML = '';
-    const FooterEvents = filterAndSortFooterEvents(events, new Date()).slice(0, 10);
+    const FooterEvents = filterAndSortFooterEvents(events, new Date()).slice(0, 20);
 
     // Create a structured list of event details
     FooterEvents.forEach(event => {
@@ -433,7 +431,7 @@ function clearDots(indicatorsContainer) {
     indicatorsContainer.innerHTML = '';
 }
 
-
+/*
 function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
     //only count divs elements
     //const totalCards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV').length;
@@ -478,6 +476,7 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
 
+
         // Update dots
         updateDots(indicatorsContainer, currentStartIndex);
 
@@ -489,6 +488,106 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
         return 0;
     }
 }
+*/
+
+
+
+
+function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
+    const totalCards = cardContainer.children.length;
+    const totalDots = Math.max(0, Math.ceil((totalCards - visibleCards) / visibleCards)); // Adjusted calculation for total dots
+
+    // Generate dots
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i <= totalDots; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        // Set the first dot as active
+        if (i === 0) dot.classList.add('active');
+        // Append to fragment, not directly to DOM
+        fragment.appendChild(dot);
+    }
+    indicatorsContainer.appendChild(fragment);
+}
+
+function updateDots(indicatorsContainer, currentStartIndex, visibleCards) {
+    const dots = indicatorsContainer.querySelectorAll('.dot');
+    const currentDot = Math.floor(currentStartIndex / visibleCards); // Adjust for visibleCards
+    dots.forEach(dot => dot.classList.remove('active'));
+    if (dots[currentDot]) {
+        dots[currentDot].classList.add('active');
+    }
+}
+
+function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
+    const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
+    const totalCards = cards.length;
+
+    if (totalCards > visibleCards) {
+        const card = cards[0];
+        const { offsetHeight } = card;
+        const computedStyle = window.getComputedStyle(card);
+        const totalHeight = offsetHeight + parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom);
+
+        //console.log('totalHeight = ', totalHeight);
+
+        // Move the carousel
+        cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
+
+        // Update dots
+        updateDots(indicatorsContainer, currentStartIndex, visibleCards);
+
+        // Increment index for next rotation, cycling back if needed
+        const remainingCards = totalCards - currentStartIndex;
+        if (remainingCards > visibleCards) {
+            // Shift by visibleCards if there are enough remaining cards
+            currentStartIndex += visibleCards;
+        } else {
+            // Shift by the remaining cards if there are fewer than visibleCards left
+            currentStartIndex = 0; // Reset to the first set of cards after the last shift
+        }
+
+        // Ensure currentStartIndex stays within bounds
+        currentStartIndex = Math.min(currentStartIndex, totalCards - visibleCards);
+        console.log(currentStartIndex);
+
+        return currentStartIndex;
+    } else {
+        // Reset the carousel position if not enough cards
+        cardContainer.style.transform = `translateY(0px)`;
+        return 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function updateElementHeight(elementSelector, containerSelector, multiplier) {
