@@ -509,10 +509,32 @@ function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
     }
     indicatorsContainer.appendChild(fragment);
 }
-
+/*
 function updateDots(indicatorsContainer, currentStartIndex, visibleCards) {
     const dots = indicatorsContainer.querySelectorAll('.dot');
     const currentDot = Math.floor(currentStartIndex / visibleCards); // Adjust for visibleCards
+    dots.forEach(dot => dot.classList.remove('active'));
+    if (dots[currentDot]) {
+        dots[currentDot].classList.add('active');
+    }
+}
+*/
+
+function updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards) {
+    const dots = indicatorsContainer.querySelectorAll('.dot');
+
+    // Calculate the total shifts needed to reach the last set of visible cards
+    const totalShifts = Math.ceil((totalCards - visibleCards) / visibleCards);
+    
+    // Determine the current dot index
+    let currentDot = Math.floor(currentStartIndex / visibleCards);
+    
+    // Ensure that the last dot gets activated if it's the final partial shift
+    if (currentStartIndex + visibleCards >= totalCards) {
+        currentDot = totalShifts; // Activate the last dot
+    }
+
+    // Update dot classes
     dots.forEach(dot => dot.classList.remove('active'));
     if (dots[currentDot]) {
         dots[currentDot].classList.add('active');
@@ -529,13 +551,13 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
         const computedStyle = window.getComputedStyle(card);
         const totalHeight = offsetHeight + parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom);
 
-        //console.log('totalHeight = ', totalHeight);
+        console.log('totalHeight = ', totalHeight);
 
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
 
         // Update dots
-        updateDots(indicatorsContainer, currentStartIndex, visibleCards);
+        updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards);
 
         // Increment index for next rotation, cycling back if needed
         const remainingCards = totalCards - currentStartIndex;
@@ -549,7 +571,7 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 
         // Ensure currentStartIndex stays within bounds
         currentStartIndex = Math.min(currentStartIndex, totalCards - visibleCards);
-        console.log(currentStartIndex);
+        //console.log(currentStartIndex);
 
         return currentStartIndex;
     } else {
