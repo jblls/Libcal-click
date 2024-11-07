@@ -3,7 +3,7 @@
 /* ========================= */
 
 html {
-    font-size: 30px; /* Base root size: 1rem = 16px */
+    font-size: 30px; 
 }
 
 body {
@@ -14,17 +14,20 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.outside {
+.page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh; 
 }
-.head {
+
+.header-container {
     flex: 0, 0, auto;
 }
+
 .main {
     flex: 1;
 }
+
 .container-fluid {
     --bs-gutter-x: 15rem;
     padding-right: calc(var(--bs-gutter-x)* .5);
@@ -36,26 +39,36 @@ body {
     padding-right: 0.625rem;
 }
 
-
 .card {
     flex-direction: row;
     align-items: center;
 }
 
-
+/* =========================== */
+/* Generic QR and Title styles */
+/* =========================== */
 
 .qr-button {
     display: none;
 }
 
-#qrcode,
 .qr_event,
-.qr_future {
+.qr_footer {
     display: block;
 }
 
+.qr_event img, .qr_footer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ==================================== */
+/* Events' card title wrapping ellipses */
+/* ==================================== */
+
 .card-title,
-.event-title {
+.card-title-footer {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -63,7 +76,10 @@ body {
 }
 
 
-/* Extra-large screens (min-width: 2150px) */
+/* ========================= */
+/*         Media Queries     */
+/* ========================= */
+
 @media (max-width: 2100px) {
     html {
         font-size: 20px;
@@ -73,19 +89,13 @@ body {
         display: none;
     }
 
-    #qrcode,
     .qr_event,
-    .qr_future {
-        display: block;
-        /*width: 4rem;*/
+    .qr_footer {
         height: 4rem;
     }
 
     .card-title,
-    .event-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .card-title-footer {
         max-width: 40rem;
     }
 }
@@ -100,29 +110,20 @@ body {
         display: none;
     }
 
-    #qrcode,
-    .qr_event,
-    .qr_future {
-        display: block;
-    }
-
     .card-title,
-    .event-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .card-title-footer {
         max-width: 40rem;
     }
 
 }
 
-@media (max-width: 780px) {
+@media (max-width: 840px) {
     html {
         font-size: 8px;
     }
-    #qrcode,
+
     .qr_event,
-    .qr_future {
+    .qr_footer {
         display: none;
     }
 
@@ -141,10 +142,7 @@ body {
         background-color: #0056b3; /* Darker color on hover */
     }
     .card-title,
-    .event-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .card-title-footer {
         max-width: 35rem;
     }
 
@@ -156,9 +154,9 @@ body {
     html {
         font-size: 5px;
     }
-    #qrcode,
+
     .qr_event,
-    .qr_future {
+    .qr_footer {
         display: none;
     }
 
@@ -177,23 +175,11 @@ body {
         background-color: #0056b3; /* Darker color on hover */
     }
     .card-title,
-    .event-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .card-title-footer {
         max-width: 25rem;
     }
 
 }
-
-
-.qr_event img, .qr_future img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-
 
 
 
@@ -205,14 +191,14 @@ body {
 /*         Header           */
 /* ========================= */
 
-.background-shape-container{
+.hero-container{
     position: absolute;
     z-index: -1;
     top: -8rem;
     left: -10rem;
     width: 25rem;
 }
-.background-shape {
+.hero {
     fill: #ffdc00;
 }
 
@@ -293,11 +279,11 @@ header {
 /*         Card Styles      */
 /* ========================= */
 
-#event-container {
+#events-container {
     /*height: calc(8 * (8.5rem));*/
     overflow: hidden;
 }
-#important-events-list {
+#footer-events-container {
     overflow: hidden;
 }
 .carousel {
@@ -416,14 +402,14 @@ footer {
     padding-top: 1rem;
 }
 
-.important-events-title {
+.footer-events-title {
     text-align: left;
     font-weight: bold;
     font-size: 2rem;
     margin-bottom: 1.875rem; /* 30px */
 }
 
-.event-item {
+.footer-item {
     display: flex;
     background-color: #4b4b4b;
     padding: 0.625rem; /* 10px */
@@ -431,7 +417,7 @@ footer {
     border-radius: 0.3125rem; /* 5px */
 }
 
-.event-date {
+.card-date-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -439,32 +425,32 @@ footer {
     text-align: center;
 }
 
-.event-date > * {
+.card-date-footer > * {
     flex: 1;
     min-width: 3.125rem; /* 50px */
 }
 
-.event-date strong {
+.card-date-footer strong {
     font-size: 1.5rem; /* 24px */
 }
 
-.event-date span {
+.card-date-footer span {
     font-size: 0.875rem; /* 14px */
 }
 
-.event-details {
+.card-details-footer {
     margin-left: 0.9375rem; /* 15px */
     flex-grow: 1;
     text-align: left;
 }
 
-.event-title {
+.card-title-footer {
     font-weight: bold;
     font-size: 1.125rem; /* 18px */
     margin-bottom: 0.3125rem; /* 5px */
 }
 
-.event-time-location {
+.card-timelocation-footer {
     font-size: 0.875rem; /* 14px */
     color: #ccc;
 }

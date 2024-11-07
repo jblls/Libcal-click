@@ -1,18 +1,25 @@
-let lastData = null; // Variable to store the last fetched data
-let eventsData = null; // Declare a variable to store the fetched events
+let lastEventsData = null; // Variable to store the last fetched data
+let currentEventsData = null; // Declare a variable to store the fetched events
+
+const visibleCards = 10;
+const visibleCards_footer = 5;
+let currentStartIndex = 0;
+let currentStartIndex_footer = 0;
+
 
 function genQRCode(elementId, url) {
     const element = document.getElementById(elementId);
 
     // Clear any existing QR code if present
     element.innerHTML = "";
+
     new QRCode(element, {
         text: url,
         width: 90,
         height: 90
     });
 }
-//genQRCode("qrcode", window.location.href);
+
 
 
 // Format time to display only hours and minutes
@@ -42,11 +49,9 @@ async function fetchEventData(filePath) {
 // Fetch JSON files and load them into 1 Object
 async function getEvents() {
     try {
-        /*
-        // Fetch the JSON file
-        const response = await fetch('events_data.json', { method: 'GET' });
-        const eventData = await response.json();
-        */
+        // Fetch ONE JSON file
+        //const response = await fetch('events_data.json', { method: 'GET' });
+        //const eventData = await response.json();
 
         const eventData1 = await fetchEventData('events_data.json');
         const eventData2 = await fetchEventData('events_data2.json');
@@ -62,16 +67,15 @@ async function getEvents() {
     }
 }
 
-// Check if the Json Object has changed, and if so, 
-// call displayEvents & displayFutureEvents
+// Check if the Json Object has changed, and if so, call displayEvents & displayFooterEvents
 async function checkForUpdates() {
     const newData = await getEvents();
 
     // Compare the newly read data with the last fetched data
-    if (newData && JSON.stringify(newData) !== JSON.stringify(lastData)) {
+    if (newData && JSON.stringify(newData) !== JSON.stringify(lastEventsData)) {
         console.log('Data has changed, refreshing the page...');
-        lastData = newData; // Update lastData to the new data
-        eventsData = newData; // Store the fetched events for later use
+        lastEventsData = newData; // Update lastEventsData to the new data
+        currentEventsData = newData; // Store the fetched events for later use
 
     } else {
         console.log('No change in data.');
@@ -81,7 +85,7 @@ async function checkForUpdates() {
 
     // Display events only if data has changed
     displayEvents(newData, new Date()); // Display events for today
-    displayFutureEvents(newData); // Display future events
+    displayFooterEvents(newData); // Display future events
 
     clearDots(document.getElementById('carousel-indicators'));
     initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
@@ -89,10 +93,11 @@ async function checkForUpdates() {
     clearDots(document.getElementById('carousel-indicators-footer'));
     initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
 
-    updateElementHeight('.event-item', '#important-events-list', visibleCards_footer); // For event items
-    updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
+    updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
+    updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
 
 }
+
 
 // Display the current Month header with the icon
 function displayMonthHeader() {
@@ -145,16 +150,17 @@ function displayWeek() {
             dayDiv.classList.add('highlight');
 
             // Show events for the clicked day
-            displayEvents(eventsData, dayDate);
+            displayEvents(currentEventsData, dayDate);
 
             clearDots(document.getElementById('carousel-indicators'));
             initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
-            updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
+            updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
         });
 
         weekContainer.appendChild(dayDiv);
     }
 }
+
 
 // Display event cards and highlight the closest event
 function displayEvents(events, selectedDate) {
@@ -164,9 +170,8 @@ function displayEvents(events, selectedDate) {
     // Clear existing content
     eventContainer.innerHTML = '';
 
-    // Get up to 10 relevant events, for Today or Future days,
-    // depending on the selected date
-    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortFutureEvents)(events, selectedDate).slice(0, 20);
+    // Get up to 20 relevant events, for Today or Future days, depending on the selected date
+    const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortOtherdayEvents)(events, selectedDate).slice(0, 20);
 
     if (relevantEvents.length === 0) {
         eventContainer.appendChild(createNoEventsCard());
@@ -191,10 +196,7 @@ function displayEvents(events, selectedDate) {
             genQRCode(`qrcode_${event.id}`, event.url.public);
         });
 
-
-
     }
-
 }
 
 
@@ -240,8 +242,8 @@ function createEventCard(event, selectedDate) {
     return { card, timeDiff };
 }
 
-// Add highlight-card class for light yellow background,
-// and Happening soon little box
+
+// Add highlight-card class for light yellow background, and Happening soon little box
 function highlightEvent(card) {
     card.classList.add('highlight-card');
     //card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
@@ -324,13 +326,13 @@ function laterEvent(card) {
 }
 
 
-function displayFutureEvents(events) {
-    const importantEventsList = document.getElementById('carousel-footer');
-    importantEventsList.innerHTML = '';
-    const upcomingEvents = filterAndSortImportantEvents(events, new Date()).slice(0, 10);
+function displayFooterEvents(events) {
+    const FooterEventsList = document.getElementById('carousel-footer');
+    FooterEventsList.innerHTML = '';
+    const FooterEvents = filterAndSortFooterEvents(events, new Date()).slice(0, 10);
 
     // Create a structured list of event details
-    upcomingEvents.forEach(event => {
+    FooterEvents.forEach(event => {
         const eventStart = new Date(event.start);
         const eventEnd = new Date(event.end);
 
@@ -340,37 +342,35 @@ function displayFutureEvents(events) {
 
         // Create a new div for each event
         const eventDiv = document.createElement('div');
-        eventDiv.classList.add('event-item', 'my-2');
+        eventDiv.classList.add('footer-item', 'my-2');
         eventDiv.innerHTML = `
-            <div class="event-date">
+            <div class="card-date-footer">
                 <strong>${dayNumber}</strong>
                 <span>${dayName}</span>
             </div>
-            <div class="event-details">
-                <div class="event-title">${event.title}</div>
-                <div class="event-time-location">
+            <div class="card-details-footer">
+                <div class="card-title-footer">${event.title}</div>
+                <div class="card-timelocation-footer">
                     ${formatTime(eventStart)} - ${formatTime(eventEnd)} &nbsp;&nbsp; | &nbsp;&nbsp; ${location}
                 </div>
             </div>
             
-            <div id="qrcode_future_${event.id}" class="qr_future"></div>
+            <div id="qrcode_footer_${event.id}" class="qr_footer"></div>
             <a href="${event.url.public}" target="_blank" class="qr-button">
             <span>Event URL</span>
             </a>
         `;
 
-        importantEventsList.appendChild(eventDiv);
+        FooterEventsList.appendChild(eventDiv);
 
         // Generate QR code for the specific event URL
-        genQRCode(`qrcode_future_${event.id}`, event.url.public);
-
+        genQRCode(`qrcode_footer_${event.id}`, event.url.public);
     });
 }
 
 
-
-// Filter and sort future events (setting the start at midnight) by start time
-function filterAndSortFutureEvents(events, selectedDate) {
+// Filter and sort Other days events by start time (setting the start at midnight)
+function filterAndSortOtherdayEvents(events, selectedDate) {
     const startOfDay = new Date(selectedDate).setHours(0, 0, 0, 0);
     const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
 
@@ -385,7 +385,8 @@ function filterAndSortFutureEvents(events, selectedDate) {
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
 
-// Filter and sort Today events by start time
+
+// Filter and sort Today events by start time (drop them if endtime is passed)
 function filterAndSortTodayEvents(events, selectedDate) {
     const startOfDay = new Date(selectedDate);
     const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
@@ -403,7 +404,8 @@ function filterAndSortTodayEvents(events, selectedDate) {
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
 
-function filterAndSortImportantEvents(events, currentDate) {
+
+function filterAndSortFooterEvents(events, currentDate) {
     const tomorrow = new Date(currentDate).setHours(0, 0, 0, 0);
     const DaysAhead = new Date(currentDate).setDate(currentDate.getDate() + 5);
 
@@ -426,29 +428,34 @@ function filterAndSortImportantEvents(events, currentDate) {
 }
 
 
-const visibleCards = 10;
-const visibleCards_footer = 5;
-let currentStartIndex = 0;
-let currentStartIndex_footer = 0;
-
+// Clears all existing dot elements
 function clearDots(indicatorsContainer) {
-    indicatorsContainer.innerHTML = ''; // Clears all existing dot elements
+    indicatorsContainer.innerHTML = '';
 }
 
+
 function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
-    const totalCards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV').length;
+    //only count divs elements
+    //const totalCards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV').length;
+    //counts all direct children elements
+    const totalCards = cardContainer.children.length;
     const totalDots = totalCards - visibleCards;
 
     // Generate dots
-    if (totalCards > visibleCards) {
+    if (totalDots > 0) {
+        const fragment = document.createDocumentFragment();
         for (let i = 0; i < totalDots + 1; i++) {
             const dot = document.createElement('div');
             dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active'); // Set the first dot as active
-            indicatorsContainer.appendChild(dot);
+            // Set the first dot as active
+            if (i === 0) dot.classList.add('active');
+            // Append to fragment, not directly to DOM
+            fragment.appendChild(dot);
         }
+        indicatorsContainer.appendChild(fragment);
     }
 }
+
 
 function updateDots(indicatorsContainer, currentStartIndex) {
     const dots = indicatorsContainer.querySelectorAll('.dot');
@@ -456,24 +463,20 @@ function updateDots(indicatorsContainer, currentStartIndex) {
     dots[currentStartIndex].classList.add('active');
 }
 
+
 function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
     const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
     const totalCards = cards.length;
 
-
     if (totalCards > visibleCards) {
-        const card = Array.from(cardContainer.children).find(child => child.tagName === 'DIV');
-        const cardHeight = card.offsetHeight;
+        const card = cards[0];
+        const { offsetHeight } = card;
         const computedStyle = window.getComputedStyle(card);
-        const marginTop = parseFloat(computedStyle.marginTop);
-        const marginBottom = parseFloat(computedStyle.marginBottom);
-        const totalHeight = cardHeight + marginTop + marginBottom;
+        const totalHeight = offsetHeight + parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom);
         console.log('totalHeight = ', totalHeight);
-        
+
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
-
-    
 
         // Update dots
         updateDots(indicatorsContainer, currentStartIndex);
@@ -488,86 +491,81 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 }
 
 
-
-
-
 function updateElementHeight(elementSelector, containerSelector, multiplier) {
-    // Get the target element
+    // Get the target element and container
     const element = document.querySelector(elementSelector);
-
-    if (!element) return; // Exit if element doesn't exist
-
-    // Get the height of the element
-    const elementHeight = element.offsetHeight;
-
-    // Get the computed style of the element to extract margin
-    const computedStyle = window.getComputedStyle(element);
-    const marginTop = parseFloat(computedStyle.marginTop);
-    const marginBottom = parseFloat(computedStyle.marginBottom);
-
-    // Total height including margin
-    const totalHeight = elementHeight + marginTop + marginBottom;
-
-    // Get the target container
     const container = document.querySelector(containerSelector);
-    if (!container) return; // Exit if container doesn't exist
+
+    // Exit early if either the element or container doesn't exist
+    if (!element || !container) return;
+
+    // Calculate the total height including margin
+    const { offsetHeight } = element;
+    const { marginTop, marginBottom } = window.getComputedStyle(element);
+    const totalHeight = offsetHeight + parseFloat(marginTop) + parseFloat(marginBottom);
 
     // Set the height of the container based on the element's total height and multiplier
     container.style.height = `${totalHeight * multiplier}px`;
 }
 
 
-
-
-
-
-
 // Initialize the page and refresh every 10 minutes
 function init() {
-    checkForUpdates(); // Fetch the events on initial load
+    // Get references to frequently used elements
+    const carousel = document.querySelector('#carousel');
+    const carouselIndicators = document.getElementById('carousel-indicators');
+    const carouselFooter = document.querySelector('#carousel-footer');
+    const carouselIndicatorsFooter = document.getElementById('carousel-indicators-footer');
+
+    // Store references to DOM elements upfront to avoid querying in intervals
+    const updateInterval = 5000;
+    const updateFooterInterval = 2000 * Math.PI;
+    const refreshInterval = 60000;
+
+    // Fetch the events on initial load
+    checkForUpdates();
     displayMonthHeader();
     displayWeek();
 
-    // Only set interval if there are more than 5 cards
+    // Set up carousel intervals
     setInterval(() => {
         currentStartIndex = updateCarousel(
-            document.querySelector('#carousel'),
-            document.getElementById('carousel-indicators'),
+            carousel,
+            carouselIndicators,
             currentStartIndex,
             visibleCards
         );
-    }, 5000);
+    }, updateInterval);
 
     setInterval(() => {
         currentStartIndex_footer = updateCarousel(
-            document.querySelector('#carousel-footer'),
-            document.getElementById('carousel-indicators-footer'),
+            carouselFooter,
+            carouselIndicatorsFooter,
             currentStartIndex_footer,
             visibleCards_footer
         );
-    }, 5000);
+    }, updateFooterInterval);
 
-    // Check for updates every 1 minutes (60,000 milliseconds)
+    // Set up regular updates (every 60 seconds)
     setInterval(() => {
         checkForUpdates();
         displayMonthHeader();
         displayWeek();
-    }, 60000);
+    }, refreshInterval);
 
 
-    // Call the function when the page loads
-    window.addEventListener('load', () => {
-        updateElementHeight('.event-item', '#important-events-list', visibleCards_footer); // For event items
-        updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
-    });
-
-    // Optionally, call the function on resize
+    let resizing = false;
     window.addEventListener('resize', () => {
-        updateElementHeight('.event-item', '#important-events-list', visibleCards_footer); // For event items
-        updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#event-container', visibleCards); // For cards
+        if (!resizing) {
+            resizing = true;
+            requestAnimationFrame(() => {
+                // Perform resizing operations
+                updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
+                updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
+                resizing = false;
+            });
+        }
     });
-
-
 
 
 }
