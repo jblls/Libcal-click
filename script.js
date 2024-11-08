@@ -150,11 +150,11 @@ function displayWeek() {
             <div>${dayNames[i]}</div>
         `;
 
-        // Highlight today
+        // when the loop reaches Today: Highlight today
         if (dayDate.toDateString() === today.toDateString()) {
             dayDiv.classList.add('highlight');
 
-            // Call displayEvents if this is a repeat call and the day is "today"
+            // if the currently selected day was not today already, refresh cards
             if (lastHighlightedDate && lastHighlightedDate.toDateString() !== today.toDateString()) {
                 displayEvents(currentEventsData, dayDate); // Refresh display for today
                 initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
@@ -209,7 +209,7 @@ function displayEvents(events, selectedDate) {
     // Clear existing content
     eventContainer.innerHTML = '';
 
-    // Get up to 20 relevant events, for Today or Future days, depending on the selected date
+    // Filter events from JSON for Today or Other days (clicked), and select first 20. If other day show ALL events, not just future ones.
     const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortOtherdayEvents)(events, selectedDate).slice(0, 20);
 
     if (relevantEvents.length === 0) {
@@ -634,10 +634,34 @@ function init() {
     const updateFooterInterval = 2000 * Math.PI;
     const refreshInterval = 60000;
 
-    // Fetch the events on initial load
+    // Fetch the events on initial load and create Cards and Calendar
     firstLoad();
     displayMonthHeader();
     displayWeek();
+
+    // re-set to Today, if on another day (60s), it also calls displayEvents & initializeDots
+    setInterval(() => {
+        displayWeek();
+        console.log('displayWeek()');
+    }, 60000);
+
+    // Set updates to check JSON (60s)
+    setInterval(() => {
+        checkForUpdates();
+        console.log('checkForUpdates()');
+    }, 50000);
+
+    // Set updates to refresh Happening status and drop expired cards (60s), ONLY if the calendar day is TODAY
+    setInterval(() => {
+        if (lastHighlightedDate && lastHighlightedDate.toDateString() === new Date().toDateString()) {
+            displayEvents(currentEventsData, lastHighlightedDate);
+            initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
+            console.log('displayEvents()');
+            console.log(lastHighlightedDate);
+        };
+    }, 20000);
+
+
 
 
     // Set up carousel intervals
@@ -658,14 +682,6 @@ function init() {
             visibleCards_footer
         );
     }, updateFooterInterval);
-
-    // Set up regular updates (every 60 seconds)
-    setInterval(() => {
-        checkForUpdates();
-        displayMonthHeader();
-        displayWeek();
-    }, refreshInterval);
-
 
     let resizing = false;
     window.addEventListener('resize', () => {
