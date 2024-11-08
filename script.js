@@ -28,6 +28,52 @@ function formatTime(date) {
 }
 
 
+// function to schedule a cronjob
+function scheduleTask(targetTime, task) {
+    // Calculate the target time in milliseconds
+    const now = new Date();
+    const target = new Date();
+    target.setHours(targetTime.hours, targetTime.minutes, 0, 0); // Set the hours and minutes of the target time
+
+    // If the target time has already passed today, schedule for the next day
+    if (target <= now) {
+        target.setDate(target.getDate() + 1);
+    }
+
+    // Calculate the time remaining until the task should be executed
+    const delay = target - now;
+
+    // Use setTimeout to schedule the task and reschedule it daily using setInterval
+    setTimeout(() => {
+        task(); // Call the function at the specified time
+
+        // Schedule the task to be executed every 24 hours after the first run
+        setInterval(task, 24 * 60 * 60 * 1000);
+    }, delay);
+}
+function scheduleEveryMinuteAt(secondsOffset, interval, task) {
+    // Calculate the time until the first occurrence at `secondsOffset` seconds after the start of each minute
+    const now = new Date();
+    const nextRun = new Date();
+    nextRun.setSeconds(secondsOffset, 0); // Set seconds to the offset (e.g., 10 seconds) and milliseconds to 0
+
+    // If the current time has already passed this second mark within the current minute, schedule for the next minute
+    if (nextRun <= now) {
+        nextRun.setMinutes(nextRun.getMinutes() + 1);
+    }
+
+    // Calculate the delay until the first execution
+    const delay = nextRun - now;
+
+    // Schedule the task to run at the first occurrence
+    setTimeout(() => {
+        task(); // Execute the task
+
+        // Schedule the task to run every minute afterwards
+        setInterval(task, interval * 1000); // 60 seconds (1 minute) interval
+    }, delay);
+}
+
 // Fetch JSON file
 async function fetchEventData(filePath) {
     let eventData = [];
@@ -154,7 +200,7 @@ function displayWeek() {
         if (dayDate.toDateString() === today.toDateString()) {
             dayDiv.classList.add('highlight');
 
-            // if the currently selected day was not today already, refresh cards
+            // if the currently selected day is not today already, refresh cards, otherwise do nothing and cards will not be updated
             if (lastHighlightedDate && lastHighlightedDate.toDateString() !== today.toDateString()) {
                 displayEvents(currentEventsData, dayDate); // Refresh display for today
                 initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
@@ -639,7 +685,7 @@ function init() {
     displayMonthHeader();
     displayWeek();
 
-    // re-set to Today, if on another day (60s), it also calls displayEvents & initializeDots
+    // if on another day, re-set to Today, and also call displayEvents & initializeDots
     setInterval(() => {
         displayWeek();
         console.log('displayWeek()');
@@ -651,7 +697,8 @@ function init() {
         console.log('checkForUpdates()');
     }, 50000);
 
-    // Set updates to refresh Happening status and drop expired cards (60s), ONLY if the calendar day is TODAY
+    /*
+    // Refresh Happening status and drop expired cards (60s), ONLY if the calendar day is TODAY
     setInterval(() => {
         if (lastHighlightedDate && lastHighlightedDate.toDateString() === new Date().toDateString()) {
             displayEvents(currentEventsData, lastHighlightedDate);
@@ -660,8 +707,17 @@ function init() {
             console.log(lastHighlightedDate);
         };
     }, 20000);
+*/
 
-
+    // Example usage: Schedule a task to run 1 seconds after every 20 seconds
+    scheduleEveryMinuteAt(1, 20, () => {
+        if (lastHighlightedDate && lastHighlightedDate.toDateString() === new Date().toDateString()) {
+            displayEvents(currentEventsData, lastHighlightedDate);
+            initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
+            console.log('displayEvents()');
+            console.log(lastHighlightedDate);
+        };
+    });
 
 
     // Set up carousel intervals
