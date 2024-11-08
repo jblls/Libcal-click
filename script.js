@@ -128,7 +128,7 @@ async function firstLoad() {
 
     // Initialize Carousel containers to hide under
     updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
-    updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
+    updateElementHeight('.card.mb-3.shadow-sm.bg-light.later-card', '#events-container', visibleCards); // For cards
 
 }
 
@@ -745,7 +745,7 @@ function init() {
             resizing = true;
             requestAnimationFrame(() => {
                 updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer);
-                updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);
+                updateElementHeight('.card.mb-3.shadow-sm.bg-light.later-card', '#events-container', visibleCards);
                 resizing = false;
             });
         }
