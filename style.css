@@ -280,7 +280,6 @@ header {
 /* ========================= */
 
 #events-container {
-    /*height: calc(8 * (8.5rem));*/
     overflow: hidden;
 }
 #footer-events-container {
@@ -341,7 +340,7 @@ header {
     margin-right: 1.875rem; /* 30px */
 }
 
-.highlight-card {
+.soon-card {
     /*background-color: rgba(242, 235, 204, 0) !important;*/
 }
 

@@ -1,5 +1,5 @@
-let lastEventsData = null; // Variable to store the last fetched data
-let currentEventsData = null; // Declare a variable to store the fetched events
+// Variables to store the last fetched data for comparison if data changes
+let currentEventsData = null; 
 
 const visibleCards = 10;
 const visibleCards_footer = 5;
@@ -70,9 +70,8 @@ async function checkForUpdates() {
     const newData = await getEvents();
 
     // Compare the newly read data with the last fetched data
-    if (newData && JSON.stringify(newData) !== JSON.stringify(lastEventsData)) {
+    if (newData && JSON.stringify(newData) !== JSON.stringify(currentEventsData)) {
         console.log('Data has changed, refreshing the page...');
-        lastEventsData = newData; // Update lastEventsData to the new data
         currentEventsData = newData; // Store the fetched events for later use
 
     } else {
@@ -85,10 +84,8 @@ async function checkForUpdates() {
     displayEvents(newData, new Date()); // Display events for today
     displayFooterEvents(newData); // Display future events
 
-    clearDots(document.getElementById('carousel-indicators'));
-    initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
 
-    clearDots(document.getElementById('carousel-indicators-footer'));
+    initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
     initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
 
     updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
@@ -122,9 +119,10 @@ function displayWeek() {
     // Clear existing week content if any
     weekContainer.innerHTML = '';
 
+    // Reference to highlight the current day
+    let highlightedDay = null;
     for (let i = 0; i < 7; i++) {
         const dayDate = new Date(startOfWeek);
-        // Get the date for each day of the week
         dayDate.setDate(startOfWeek.getDate() + i);
 
         const dayDiv = document.createElement('div');
@@ -136,24 +134,25 @@ function displayWeek() {
 
         if (dayDate.toDateString() === today.toDateString()) {
             dayDiv.classList.add('highlight');
+            highlightedDay = dayDiv;  // Save the reference to the highlighted day
         }
 
         // Add click event listener to display events for the clicked day
         dayDiv.addEventListener('click', () => {
-
-            // Remove 'highlight' from all days
-            document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
-
-            // Highlight the clicked day
-            dayDiv.classList.add('highlight');
+            // Only remove highlight if necessary
+            if (highlightedDay !== dayDiv) {
+                highlightedDay?.classList.remove('highlight'); // Remove from previously highlighted day
+                dayDiv.classList.add('highlight');
+                highlightedDay = dayDiv; // Update the current highlighted day
+            }
 
             // Show events for the clicked day
             displayEvents(currentEventsData, dayDate);
 
-            clearDots(document.getElementById('carousel-indicators'));
             initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
-            updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
+            updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);
         });
+
 
         weekContainer.appendChild(dayDiv);
     }
@@ -184,7 +183,7 @@ function displayEvents(events, selectedDate) {
                 if (timeDiff < 0) {
                     nowEvent(card); // Call nowEvent if timeDiff is less than 0
                 } else if (timeDiff > 0 && timeDiff <= 7200000) {
-                    highlightEvent(card); // Call highlightEvent if timeDiff is between 0 and 2 hours
+                    soonEvent(card); // Call soonEvent if timeDiff is between 0 and 2 hours
                 } else {
                     laterEvent(card); // Call laterEvent for other cases
                 }
@@ -195,6 +194,42 @@ function displayEvents(events, selectedDate) {
         });
 
     }
+}
+
+
+// Filter and sort Today events by start time (drop them if endtime is passed)
+function filterAndSortTodayEvents(events, selectedDate) {
+    const startOfDay = new Date(selectedDate);
+    const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
+
+    return events.events
+        .filter(event => {
+            //const eventStart = new Date(event.start).getTime();
+            //return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
+            const eventEnd = new Date(event.end).getTime();
+            return eventEnd >= startOfDay &&
+                eventEnd <= endOfDay &&
+                event.campus.name === 'Main Library' &&
+                event.location.name !== ''; // if Event is today
+        })
+        .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
+}
+
+
+// Filter and sort Other days events by start time (setting the start at midnight)
+function filterAndSortOtherdayEvents(events, selectedDate) {
+    const startOfDay = new Date(selectedDate).setHours(0, 0, 0, 0);
+    const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
+
+    return events.events
+        .filter(event => {
+            const eventStart = new Date(event.start).getTime();
+            return eventStart >= startOfDay &&
+                eventStart <= endOfDay &&
+                event.campus.name === 'Main Library' &&
+                event.location.name !== ''; // if Event is today
+        })
+        .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
 
 
@@ -241,35 +276,7 @@ function createEventCard(event, selectedDate) {
 }
 
 
-// Add highlight-card class for light yellow background, and Happening soon little box
-function highlightEvent(card) {
-    card.classList.add('highlight-card');
-    //card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
-
-    // Create a container for the title and "Happening soon" elements
-    const titleContainer = document.createElement('div');
-    titleContainer.classList.add('title-container');
-
-    // Move the title into the container
-    const titleElement = card.querySelector('.card-title');
-    if (titleElement) {
-        titleContainer.appendChild(titleElement);
-    }
-
-    // Create and add the "Happening soon" element
-    const happeningSoonElement = document.createElement('div');
-    happeningSoonElement.classList.add('happening-soon');
-    happeningSoonElement.textContent = 'Happening soon';
-    titleContainer.appendChild(happeningSoonElement);
-
-    // Insert the title container at the beginning of the card-body
-    const cardBody = card.querySelector('.card-body > div');
-    if (cardBody) {
-        cardBody.prepend(titleContainer);
-    }
-}
-
-// Add Later today little box
+// Add happening-now class, and Happening now text
 function nowEvent(card) {
     card.classList.add('now-card');
 
@@ -296,7 +303,37 @@ function nowEvent(card) {
     }
 }
 
-// Add Later today little box
+
+// Add soon-card class and Happening soon text
+function soonEvent(card) {
+    card.classList.add('soon-card');
+    //card.innerHTML += `<div class="happening-soon">Happening soon</div>`;
+
+    // Create a container for the title and "Happening soon" elements
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('title-container');
+
+    // Move the title into the container
+    const titleElement = card.querySelector('.card-title');
+    if (titleElement) {
+        titleContainer.appendChild(titleElement);
+    }
+
+    // Create and add the "Happening soon" element
+    const happeningSoonElement = document.createElement('div');
+    happeningSoonElement.classList.add('happening-soon');
+    happeningSoonElement.textContent = 'Happening soon';
+    titleContainer.appendChild(happeningSoonElement);
+
+    // Insert the title container at the beginning of the card-body
+    const cardBody = card.querySelector('.card-body > div');
+    if (cardBody) {
+        cardBody.prepend(titleContainer);
+    }
+}
+
+
+// Add later-card class and Later today text
 function laterEvent(card) {
     card.classList.add('later-card');
 
@@ -367,42 +404,6 @@ function displayFooterEvents(events) {
 }
 
 
-// Filter and sort Other days events by start time (setting the start at midnight)
-function filterAndSortOtherdayEvents(events, selectedDate) {
-    const startOfDay = new Date(selectedDate).setHours(0, 0, 0, 0);
-    const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
-
-    return events.events
-        .filter(event => {
-            const eventStart = new Date(event.start).getTime();
-            return eventStart >= startOfDay &&
-                eventStart <= endOfDay &&
-                event.campus.name === 'Main Library' &&
-                event.location.name !== ''; // if Event is today
-        })
-        .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
-}
-
-
-// Filter and sort Today events by start time (drop them if endtime is passed)
-function filterAndSortTodayEvents(events, selectedDate) {
-    const startOfDay = new Date(selectedDate);
-    const endOfDay = new Date(selectedDate).setHours(23, 59, 59, 999);
-
-    return events.events
-        .filter(event => {
-            //const eventStart = new Date(event.start).getTime();
-            //return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
-            const eventEnd = new Date(event.end).getTime();
-            return eventEnd >= startOfDay &&
-                eventEnd <= endOfDay &&
-                event.campus.name === 'Main Library' &&
-                event.location.name !== ''; // if Event is today
-        })
-        .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
-}
-
-
 function filterAndSortFooterEvents(events, currentDate) {
     const tomorrow = new Date(currentDate).setHours(0, 0, 0, 0);
     const DaysAhead = new Date(currentDate).setDate(currentDate.getDate() + 5);
@@ -426,12 +427,8 @@ function filterAndSortFooterEvents(events, currentDate) {
 }
 
 
-// Clears all existing dot elements
-function clearDots(indicatorsContainer) {
-    indicatorsContainer.innerHTML = '';
-}
 
-/*
+/* update Carousel one card at a time 
 function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
     //only count divs elements
     //const totalCards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV').length;
@@ -491,54 +488,40 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 */
 
 
-
-
 function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
     const totalCards = cardContainer.children.length;
-    const totalDots = Math.max(0, Math.ceil((totalCards - visibleCards) / visibleCards)); // Adjusted calculation for total dots
+    const totalDots = Math.max(0, Math.ceil(totalCards / visibleCards));
 
-    // Generate dots
     const fragment = document.createDocumentFragment();
-    for (let i = 0; i <= totalDots; i++) {
+    for (let i = 0; i < totalDots; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
-        // Set the first dot as active
-        if (i === 0) dot.classList.add('active');
-        // Append to fragment, not directly to DOM
+        if (i === 0) dot.classList.add('active');  // Set the first dot as active
         fragment.appendChild(dot);
     }
+    // Append all dots at once to avoid multiple DOM reflows
+    indicatorsContainer.innerHTML = '';  // Clear previous dots, if any
     indicatorsContainer.appendChild(fragment);
 }
-/*
-function updateDots(indicatorsContainer, currentStartIndex, visibleCards) {
-    const dots = indicatorsContainer.querySelectorAll('.dot');
-    const currentDot = Math.floor(currentStartIndex / visibleCards); // Adjust for visibleCards
-    dots.forEach(dot => dot.classList.remove('active'));
-    if (dots[currentDot]) {
-        dots[currentDot].classList.add('active');
-    }
-}
-*/
+
 
 function updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards) {
     const dots = indicatorsContainer.querySelectorAll('.dot');
 
     // Calculate the total shifts needed to reach the last set of visible cards
     const totalShifts = Math.ceil((totalCards - visibleCards) / visibleCards);
-    
+
     // Determine the current dot index
     let currentDot = Math.floor(currentStartIndex / visibleCards);
-    
+
     // Ensure that the last dot gets activated if it's the final partial shift
     if (currentStartIndex + visibleCards >= totalCards) {
         currentDot = totalShifts; // Activate the last dot
     }
 
     // Update dot classes
-    dots.forEach(dot => dot.classList.remove('active'));
-    if (dots[currentDot]) {
-        dots[currentDot].classList.add('active');
-    }
+    dots.forEach(dot => dot.classList.remove('active'));  // Remove 'active' from all dots
+    dots[currentDot]?.classList.add('active');  // Add 'active' to the correct dot (if it exists)
 }
 
 function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
@@ -547,11 +530,9 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 
     if (totalCards > visibleCards) {
         const card = cards[0];
-        const { offsetHeight } = card;
+        const offsetHeight = card.getBoundingClientRect().height;
         const computedStyle = window.getComputedStyle(card);
         const totalHeight = offsetHeight + parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom);
-
-        console.log('totalHeight = ', totalHeight);
 
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
@@ -582,46 +563,19 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function updateElementHeight(elementSelector, containerSelector, multiplier) {
     // Get the target element and container
     const element = document.querySelector(elementSelector);
     const container = document.querySelector(containerSelector);
 
     // Exit early if either the element or container doesn't exist
-    if (!element || !container) return;
+    if (!element || !container) {
+        console.log(element, container);
+        return;
+    }
 
     // Calculate the total height including margin
-    const { offsetHeight } = element;
+    const offsetHeight = element.getBoundingClientRect().height;
     const { marginTop, marginBottom } = window.getComputedStyle(element);
     const totalHeight = offsetHeight + parseFloat(marginTop) + parseFloat(marginBottom);
 
@@ -688,7 +642,7 @@ function init() {
         }
     });
 
-
+    
 }
 
 init();
