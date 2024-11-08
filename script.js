@@ -1,5 +1,5 @@
 // Variables to store the last fetched data for comparison if data changes
-let currentEventsData = null; 
+let currentEventsData = null;
 
 const visibleCards = 10;
 const visibleCards_footer = 5;
@@ -65,32 +65,47 @@ async function getEvents() {
     }
 }
 
+
+// load JSON, and create events and containers
+async function firstLoad() {
+    const newData = await getEvents();
+    currentEventsData = newData;
+    console.log('firstLoad()');
+
+    // Create cards for all Events
+    displayEvents(newData, new Date()); // Display events for today
+    displayFooterEvents(newData); // Display future events
+
+    // Initialize carousel dots
+    initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
+    initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
+
+    // Initialize Carousel containers to hide under
+    updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
+    updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
+
+}
+
+
 // Check if the Json Object has changed, and if so, call displayEvents & displayFooterEvents
 async function checkForUpdates() {
     const newData = await getEvents();
+    console.log('CheckForUpdates()');
 
     // Compare the newly read data with the last fetched data
     if (newData && JSON.stringify(newData) !== JSON.stringify(currentEventsData)) {
         console.log('Data has changed, refreshing the page...');
-        currentEventsData = newData; // Store the fetched events for later use
+        currentEventsData = newData;
 
+        // Display events only if data has changed
+        displayEvents(newData, new Date());
+        displayFooterEvents(newData);
+
+        initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
+        initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
     } else {
         console.log('No change in data.');
     }
-
-    console.log('CheckForUpdates();');
-
-    // Display events only if data has changed
-    displayEvents(newData, new Date()); // Display events for today
-    displayFooterEvents(newData); // Display future events
-
-
-    initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
-    initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer'), visibleCards_footer);
-
-    updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
-    updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
-
 }
 
 
@@ -105,6 +120,9 @@ function displayMonthHeader() {
     `;
 }
 
+
+// Track the last highlighted date globally or within scope
+let lastHighlightedDate = null;
 // Display the week, starting from Monday until Sunday
 function displayWeek() {
     const weekContainer = document.getElementById('week-container');
@@ -116,47 +134,71 @@ function displayWeek() {
     const daysFromMonday = (today.getDay() + 6) % 7;
     startOfWeek.setDate(today.getDate() - daysFromMonday);
 
-    // Clear existing week content if any
+    // Clear existing week content if any, and event listeners
     weekContainer.innerHTML = '';
 
-    // Reference to highlight the current day
-    let highlightedDay = null;
+    // Generate the week and add elements to the container
     for (let i = 0; i < 7; i++) {
         const dayDate = new Date(startOfWeek);
         dayDate.setDate(startOfWeek.getDate() + i);
 
         const dayDiv = document.createElement('div');
         dayDiv.classList.add('p-2', 'text-center', 'clickable');
+        dayDiv.setAttribute('data-date', dayDate.toISOString()); // Store date as data attribute
         dayDiv.innerHTML = `
             <div>${dayDate.getDate()}</div>
             <div>${dayNames[i]}</div>
         `;
 
+        // Highlight today
         if (dayDate.toDateString() === today.toDateString()) {
             dayDiv.classList.add('highlight');
-            highlightedDay = dayDiv;  // Save the reference to the highlighted day
-        }
 
-        // Add click event listener to display events for the clicked day
-        dayDiv.addEventListener('click', () => {
-            // Only remove highlight if necessary
-            if (highlightedDay !== dayDiv) {
-                highlightedDay?.classList.remove('highlight'); // Remove from previously highlighted day
-                dayDiv.classList.add('highlight');
-                highlightedDay = dayDiv; // Update the current highlighted day
+            // Call displayEvents if this is a repeat call and the day is "today"
+            if (lastHighlightedDate && lastHighlightedDate.toDateString() !== today.toDateString()) {
+                displayEvents(currentEventsData, dayDate); // Refresh display for today
+                initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
             }
 
-            // Show events for the clicked day
-            displayEvents(currentEventsData, dayDate);
-
-            initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
-            updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);
-        });
-
+            lastHighlightedDate = dayDate; // Update the last highlighted date
+        }
 
         weekContainer.appendChild(dayDiv);
     }
+
+    // Add an event listener to the weekContainer and uses Event Delegation to identify clicks on day elements
+    weekContainer.addEventListener('click', (event) => {
+        const clickedDay = event.target.closest('.clickable');
+        if (!clickedDay) return; // Ignore clicks outside of day elements
+
+        // Retrieve the date from the data attribute
+        const dayDate = new Date(clickedDay.getAttribute('data-date'));
+
+        // Check if the clicked day is already highlighted
+        const previouslyHighlighted = weekContainer.querySelector('.highlight');
+        if (previouslyHighlighted && previouslyHighlighted === clickedDay) {
+            // If the clicked day is already highlighted, do nothing
+            return;
+        }
+
+        // Remove highlight from previously highlighted day
+        if (previouslyHighlighted) {
+            previouslyHighlighted.classList.remove('highlight');
+        }
+
+        // Highlight the clicked day
+        clickedDay.classList.add('highlight');
+
+        // Show events for the clicked day
+        displayEvents(currentEventsData, dayDate);
+        initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
+
+        // Update lastHighlightedDate for subsequent calls
+        lastHighlightedDate = dayDate;
+    });
 }
+
+
 
 
 // Display event cards and highlight the closest event
@@ -205,12 +247,12 @@ function filterAndSortTodayEvents(events, selectedDate) {
     return events.events
         .filter(event => {
             //const eventStart = new Date(event.start).getTime();
-            //return eventStart >= startOfDay && eventStart <= endOfDay; // if Event is today
+            //return eventStart >= startOfDay && eventStart <= endOfDay; 
             const eventEnd = new Date(event.end).getTime();
             return eventEnd >= startOfDay &&
                 eventEnd <= endOfDay &&
                 event.campus.name === 'Main Library' &&
-                event.location.name !== ''; // if Event is today
+                event.location.name !== '';
         })
         .sort((a, b) => new Date(a.start) - new Date(b.start)); // Sort by start time
 }
@@ -450,15 +492,11 @@ function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
         indicatorsContainer.appendChild(fragment);
     }
 }
-
-
 function updateDots(indicatorsContainer, currentStartIndex) {
     const dots = indicatorsContainer.querySelectorAll('.dot');
     dots.forEach(dot => dot.classList.remove('active'));
     dots[currentStartIndex].classList.add('active');
 }
-
-
 function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards) {
     const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
     const totalCards = cards.length;
@@ -472,7 +510,6 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 
         // Move the carousel
         cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
-
 
         // Update dots
         updateDots(indicatorsContainer, currentStartIndex);
@@ -598,9 +635,10 @@ function init() {
     const refreshInterval = 60000;
 
     // Fetch the events on initial load
-    checkForUpdates();
+    firstLoad();
     displayMonthHeader();
     displayWeek();
+
 
     // Set up carousel intervals
     setInterval(() => {
@@ -634,15 +672,14 @@ function init() {
         if (!resizing) {
             resizing = true;
             requestAnimationFrame(() => {
-                // Perform resizing operations
-                updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
-                updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards); // For cards
+                updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer);
+                updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);
                 resizing = false;
             });
         }
     });
 
-    
+
 }
 
 init();

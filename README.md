@@ -1,50 +1,59 @@
 # What's On interactive website.
 
-The client JS reads the JSON uploaded to the S3 bucket where the Webapp is hosted, <br/>
+The client JS reads the JSON uploaded to the S3 bucket (where the Webapp is hosted) <br/>
 with an AWS Lambda, triggered every X hours. <br/>
 
 The python script: <br/>
-*/home/nfs/z3541612_sa/libcal/**libcal.py*** <br/> 
-also uploades the JSON to this github repo using PyGithub.
-The script is also located on my local WSL Linux: </br>
-*/home/ste/Documents/libcal/**libcal.py*** </br>
-and needs an access token generated from Settings > Developer Settings > Personal Access Tokens, with repo permissions. 
+*/home/ste/Documents/libcal/libcal.py* <br/> 
+also uploades the JSON to this github repo using PyGithub.</br>
+It needs an access token generated from Settings > Developer Settings > Personal Access Tokens, with repo permissions. 
 
 
 
 
-*checkForUpdates()* calls:
+`firstLoad()` calls:
 
-- *getEvents()* which calls *fetchEventData(filePath)* to load the JSON returning **eventData**.
-- *displayEvents(newData, new Date())*
-- *displayFooterEvents(newData)*
-- *initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards)*
-- *initializeDots(document.querySelector('#carousel-footer'), document.getElementById('carousel-indicators-footer')*
-- *updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer);*
-- *updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);*
+1. `getEvents()` which calls 
+    - `fetchEventData(filePath)` to load the JSON returning **eventData**.
+2. `displayEvents(newData, new Date())`
+3. `displayFooterEvents(newData)`
+4. `initializeDots()` main and footer,
+6. `updateElementHeight()` main and footer.
 
-*displayMonthHeader()* and *displayWeek()* <br>
-are called once, but displayWeek() has an addEventListener on click to check for change of day, to:
-- remove highligths from day and add it to the clicked one:
-- *displayEvents()*
-- *clearDots(document.getElementById('carousel-indicators'));*
-- *initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);*
-- *updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);*
+`checkForUpdates()` calls:
 
-*displayEvents(events, selectedDate)* calls:
-- filter&sort function, 
-- *createEventCard(event, selectedDate)*
-- highlight cards happening status
-- genQRCode
+1. `getEvents()` which calls 
+    - `fetchEventData(filePath)` to load the JSON returning **eventData**.
+    
+    if JSON is different, then these are called:
+    1. `displayEvents(newData, new Date())`
+    2. `displayFooterEvents(newData)`
+    3. `initializeDots()` main and footer,
 
-*displayFooterEvents(events)* calls:
-- filter&sort function, 
-- create footer-item cards with innerHTML
-- genQRCode
-- *initializeDots(cardContainer, indicatorsContainer, visibleCards)* <br>
+
+`displayMonthHeader()` and `displayWeek()` <br>
+are called once at the beginning of `init()`, <br>
+but `displayWeek()` has an addEventListener on click, to check for change of day, to:
+1. remove highligths from day and add it to the clicked one:
+2. `displayEvents()`
+3. `clearDots(document.getElementById('carousel-indicators'));`
+4. `initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);`
+5. `updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);`
+
+`displayEvents(events, selectedDate)` calls:
+1. filter&sort function, 
+2. `createEventCard(event, selectedDate)`
+3. highlight cards happening status
+4. genQRCode
+
+`displayFooterEvents(events)` calls:
+1. filter&sort function, 
+2. create footer-item cards with innerHTML
+3. genQRCode
+4. `initializeDots(cardContainer, indicatorsContainer, visibleCards)` <br>
 adds the dots based on totalCards
-- *updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards)* <br>
+5. `updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards)` <br>
 highlight the current dot
-- *updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards)* <br>
-if (totalCards > visibleCards) calculate card+margin size and shift by currentStartIndex * totalHeight,
-then call *updateDots()*
+6. `updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards)` <br>
+if (totalCards > visibleCards) calculate card+margin size and shift by currentStartIndex ` totalHeight,
+then call `updateDots()`
