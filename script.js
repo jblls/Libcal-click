@@ -136,7 +136,6 @@ async function firstLoad() {
 // Check if the Json Object has changed, and if so, call displayEvents & displayFooterEvents
 async function checkForUpdates() {
     const newData = await getEvents();
-    console.log('CheckForUpdates()');
 
     // Compare the newly read data with the last fetched data
     if (newData && JSON.stringify(newData) !== JSON.stringify(currentEventsData)) {
@@ -653,7 +652,7 @@ function updateElementHeight(elementSelector, containerSelector, multiplier) {
 
     // Exit early if either the element or container doesn't exist
     if (!element || !container) {
-        console.log(element, container);
+        console.log('No element or container');
         return;
     }
 
@@ -685,11 +684,17 @@ function init() {
     displayMonthHeader();
     displayWeek();
 
+    /*
     // if on another day, re-set to Today, and also call displayEvents & initializeDots
     setInterval(() => {
         displayWeek();
         console.log('displayWeek()');
     }, 60000);
+    */
+    scheduleTask({ hours: 10, minutes: 52 }, () => {
+        displayWeek();
+        console.log('displayWeek()');
+    });
 
     // Set updates to check JSON (60s)
     setInterval(() => {
@@ -712,7 +717,7 @@ function init() {
     // Example usage: Schedule a task to run 1 seconds after every 20 seconds
     scheduleEveryMinuteAt(1, 20, () => {
         if (lastHighlightedDate && lastHighlightedDate.toDateString() === new Date().toDateString()) {
-            displayEvents(currentEventsData, lastHighlightedDate);
+            displayEvents(currentEventsData, new Date());
             initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);
             console.log('displayEvents()');
             console.log(lastHighlightedDate);
