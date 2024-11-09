@@ -692,7 +692,7 @@ function init() {
         console.log('displayWeek()');
     }, 60000);
     */
-    scheduleTask({ hours: 10, minutes: 52 }, () => {
+    scheduleTask({ hours: 1, minutes: 10 }, () => {
         displayWeek();
         console.log('displayWeek()');
     });
@@ -701,7 +701,7 @@ function init() {
     setInterval(() => {
         checkForUpdates();
         console.log('checkForUpdates()');
-    }, 50000);
+    }, 60000);
 
     /*
     // Refresh Happening status and drop expired cards (60s), ONLY if the calendar day is TODAY
@@ -716,7 +716,7 @@ function init() {
 */
 
     // Example usage: Schedule a task to run 1 seconds after every 20 seconds
-    scheduleEveryMinuteAt(1, 20, () => {
+    scheduleEveryMinuteAt(1, 30, () => {
         if (lastHighlightedDate && lastHighlightedDate.toDateString() === new Date().toDateString()) {
             displayEvents(currentEventsData, new Date());
             initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);

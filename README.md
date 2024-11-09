@@ -1,6 +1,6 @@
-# What's On interactive website.
+# What's On website.
 
-The client JS reads the JSON uploaded to the S3 bucket (where the Webapp is hosted) <br/>
+JS reads the JSON uploaded to the S3 bucket <br/>
 with an AWS Lambda, triggered every X hours. <br/>
 
 The python script: <br/>
@@ -9,21 +9,34 @@ also uploades the JSON to this github repo using PyGithub.</br>
 It needs an access token generated from Settings > Developer Settings > Personal Access Tokens, with repo permissions. 
 
 
+## Webapp structure
 
-
-`firstLoad()` calls:
+The `init()` function calls `firstLoad()`, which calls:
 
 1. `getEvents()` which calls 
-    - `fetchEventData(filePath)` to load the JSON returning **eventData**.
+    - `fetchEventData(filePath)` to load the 2 JSON returning **eventData**.
 2. `displayEvents(newData, new Date())`
 3. `displayFooterEvents(newData)`
 4. `initializeDots()` main and footer,
-6. `updateElementHeight()` main and footer.
+6. `updateElementHeight()` main and footer, if no Events today, set default based on big screen view.
+
+`displayMonthHeader()` and `displayWeek()` <br>
+`displayWeek()` is called at 1am everyday, and it has an addEventListener on click, to check for change of week day, to:
+
+1. recreate the weekContainer html with days,  
+2. highligths the current day 
+    1. if current day not Today, refresh cards and dots by calling `displayEvents()` & `initializeDots()`
+    2. if current day is Today, do nothing, as `displayEvents()` & `initializeDots()` <br>
+        will be called independentely
+3. add eventlistener to calendar element. If clicking on alreay selected day, do nothing, <br>
+otherwise call `displayEvents()` & `initializeDots()`
+
+
 
 `checkForUpdates()` calls:
 
 1. `getEvents()` which calls 
-    - `fetchEventData(filePath)` to load the JSON returning **eventData**.
+    - `fetchEventData(filePath)` to load the 2 JSONs, and collate them to return **eventData**.
     
     if JSON is different, then these are called:
     1. `displayEvents(newData, new Date())`
@@ -31,18 +44,11 @@ It needs an access token generated from Settings > Developer Settings > Personal
     3. `initializeDots()` main and footer,
 
 
-`displayMonthHeader()` and `displayWeek()` <br>
-are called once at the beginning of `init()`, <br>
-but `displayWeek()` has an addEventListener on click, to check for change of day, to:
-1. remove highligths from day and add it to the clicked one:
-2. `displayEvents()`
-3. `clearDots(document.getElementById('carousel-indicators'));`
-4. `initializeDots(document.querySelector('#carousel'), document.getElementById('carousel-indicators'), visibleCards);`
-5. `updateElementHeight('.card.mb-3.shadow-sm.bg-light.now-card', '#events-container', visibleCards);`
+`displayEvents()` & `initializeDots()` are called every 5 minutes to update cards highlight and drop them if past events end time. <br>
 
-`displayEvents(events, selectedDate)` calls:
+`displayEvents()` calls:
 1. filter&sort function, 
-2. `createEventCard(event, selectedDate)`
+2. `createEventCard()`
 3. highlight cards happening status
 4. genQRCode
 
@@ -50,10 +56,12 @@ but `displayWeek()` has an addEventListener on click, to check for change of day
 1. filter&sort function, 
 2. create footer-item cards with innerHTML
 3. genQRCode
-4. `initializeDots(cardContainer, indicatorsContainer, visibleCards)` <br>
-adds the dots based on totalCards
-5. `updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards)` <br>
-highlight the current dot
-6. `updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, visibleCards)` <br>
-if (totalCards > visibleCards) calculate card+margin size and shift by currentStartIndex ` totalHeight,
-then call `updateDots()`
+
+
+`updateCarousel()` is called every 30s. <br>
+If totalCards > visibleCards calculate card+margin size, and shift by currentStartIndex, <br>
+then calls `updateDots()`
+
+
+`updateElementHeight()` called in `firstLoad()` to set main container size, and in `init()` <br>
+as an EventListener to resize based on mobile/desktop view.
