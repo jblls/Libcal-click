@@ -651,8 +651,9 @@ function updateElementHeight(elementSelector, containerSelector, multiplier) {
     const container = document.querySelector(containerSelector);
 
     // Exit early if either the element or container doesn't exist
-    if (!element || !container) {
-        console.log('No element or container');
+    if (!element) {
+        console.log('No card elements');
+        container.style.height = `${206.375 * multiplier}px`;
         return;
     }
 
