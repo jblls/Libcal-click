@@ -16,7 +16,8 @@ function genQRCode(elementId, url) {
     new QRCode(element, {
         text: url,
         width: 90,
-        height: 90
+        height: 90,
+        render: 'svg'
     });
 }
 
@@ -128,7 +129,7 @@ async function firstLoad() {
 
     // Initialize Carousel containers to hide under
     updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer); // For event items
-    updateElementHeight('.card.mb-3.shadow-sm.bg-light.later-card', '#events-container', visibleCards); // For cards
+    updateElementHeight('.card.mb-3.shadow-sm.bg-light', '#events-container', visibleCards); // For cards
 
 }
 
@@ -653,7 +654,11 @@ function updateElementHeight(elementSelector, containerSelector, multiplier) {
     // Exit early if either the element or container doesn't exist
     if (!element) {
         console.log('No card elements');
-        container.style.height = `${206.375 * multiplier}px`;
+        if (container.id === 'events-container') {
+            container.style.height = `${206.375 * multiplier}px`;
+        } else if (container.id === 'footer-events-container') {
+            container.style.height = `${174.375 * multiplier}px`;
+        }
         return;
     }
 
@@ -751,7 +756,7 @@ function init() {
             resizing = true;
             requestAnimationFrame(() => {
                 updateElementHeight('.footer-item', '#footer-events-container', visibleCards_footer);
-                updateElementHeight('.card.mb-3.shadow-sm.bg-light.later-card', '#events-container', visibleCards);
+                updateElementHeight('.card.mb-3.shadow-sm', '#events-container', visibleCards);
                 resizing = false;
             });
         }

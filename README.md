@@ -18,7 +18,7 @@ The `init()` function calls `firstLoad()`, which calls:
 2. `displayEvents(newData, new Date())`
 3. `displayFooterEvents(newData)`
 4. `initializeDots()` main and footer,
-6. `updateElementHeight()` main and footer, if no Events today, set default based on big screen view.
+6. `updateElementHeight()` main and footer.
 
 `displayMonthHeader()` and `displayWeek()` <br>
 `displayWeek()` is called at 1am everyday, and it has an addEventListener on click, to check for change of week day, to:
@@ -63,5 +63,7 @@ If totalCards > visibleCards calculate card+margin size, and shift by currentSta
 then calls `updateDots()`
 
 
-`updateElementHeight()` called in `firstLoad()` to set main container size, and in `init()` <br>
-as an EventListener to resize based on mobile/desktop view.
+`updateElementHeight()` called in `firstLoad()` to set main & footer container size, <br>
+and in `init()` as an EventListener to resize based on mobile/desktop view.<br>
+If no Events today and/or next week, set the main and footer default height based on big screen view.
+This means that that height will remain even if resizing the screen (To Be Fixed).
