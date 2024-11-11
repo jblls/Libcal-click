@@ -12,9 +12,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739097"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
@@ -134,8 +134,8 @@
         "name": "Test - Help Zone"
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "category": [
         {
@@ -177,9 +177,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739098"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
@@ -295,8 +295,8 @@
         "name": "Test - Help Zone"
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "category": [],
       "owner": {
@@ -333,9 +333,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739099"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
@@ -442,9 +442,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739100"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
@@ -552,8 +552,8 @@
         "name": "Test - Help Zone"
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "category": [
         {
@@ -595,9 +595,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739101"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
@@ -696,9 +696,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739102"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
@@ -793,9 +793,9 @@
         "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739103"
       },
       "location": {
-        "id": 0,
+        "id": 19860,
         "type": 0,
-        "name": ""
+        "name": "Test - Help Zone"
       },
       "campus": {
         "id": 4754,
