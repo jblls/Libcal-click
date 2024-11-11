@@ -1,15 +1,15 @@
 {
   "events": [
     {
-      "id": 5738071,
+      "id": 5739097,
       "title": "Scholarly Resources for Teaching event",
       "allday": true,
-      "start": "2024-11-04T00:00:00+11:00",
-      "end": "2024-11-04T23:59:59+11:00",
+      "start": "2024-11-11T00:00:00+11:00",
+      "end": "2024-11-11T23:59:59+11:00",
       "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738071",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738071"
+        "public": "https://unsw.libcal.com/event/5739097",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739097"
       },
       "location": {
         "id": 0,
@@ -17,8 +17,8 @@
         "name": ""
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "audience": [
         {
@@ -64,20 +64,52 @@
       "geolocation": null,
       "future_dates": [
         {
-          "event_id": 5738072,
-          "start": "2024-11-05T00:00:00+11:00"
+          "event_id": 5739098,
+          "start": "2024-11-12T00:00:00+11:00"
         },
         {
-          "event_id": 5738073,
-          "start": "2024-11-06T00:00:00+11:00"
+          "event_id": 5739099,
+          "start": "2024-11-13T00:00:00+11:00"
         },
         {
-          "event_id": 5738074,
-          "start": "2024-11-07T00:00:00+11:00"
+          "event_id": 5739100,
+          "start": "2024-11-14T00:00:00+11:00"
         },
         {
-          "event_id": 5738075,
-          "start": "2024-11-08T00:00:00+11:00"
+          "event_id": 5739101,
+          "start": "2024-11-15T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739102,
+          "start": "2024-11-16T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739103,
+          "start": "2024-11-17T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
         }
       ],
       "registration_cost": 0,
@@ -86,15 +118,15 @@
       "teardown_time": 0
     },
     {
-      "id": 5738767,
+      "id": 5739111,
       "title": "Monday - Important",
       "allday": false,
-      "start": "2024-11-04T15:00:00+11:00",
-      "end": "2024-11-04T16:00:00+11:00",
+      "start": "2024-11-11T15:00:00+11:00",
+      "end": "2024-11-11T16:00:00+11:00",
       "description": "",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738767",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738767"
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
       },
       "location": {
         "id": 19860,
@@ -134,15 +166,15 @@
       "teardown_time": 0
     },
     {
-      "id": 5738180,
-      "title": "Wednseday - Important",
-      "allday": false,
-      "start": "2024-11-04T15:00:00+11:00",
-      "end": "2024-11-04T16:00:00+11:00",
-      "description": "",
+      "id": 5739098,
+      "title": "Scholarly Resources for Teaching event",
+      "allday": true,
+      "start": "2024-11-12T00:00:00+11:00",
+      "end": "2024-11-12T23:59:59+11:00",
+      "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738180",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738180"
+        "public": "https://unsw.libcal.com/event/5739098",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739098"
       },
       "location": {
         "id": 0,
@@ -150,18 +182,28 @@
         "name": ""
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
+      "audience": [
+        {
+          "id": 368,
+          "name": "HDR (Higher degree research) student"
+        },
+        {
+          "id": 369,
+          "name": "All academic staff"
+        }
+      ],
       "category": [
         {
-          "id": 44924,
-          "name": "Important"
+          "id": 44922,
+          "name": "Scholarly Resources"
         }
       ],
       "owner": {
-        "id": 58243,
-        "name": "Stefano Bernardi"
+        "id": 53611,
+        "name": "Nicole Bastock"
       },
       "presenter": "",
       "calendar": {
@@ -170,70 +212,82 @@
         "public": "https://unsw.libcal.com/calendar?cid=11369",
         "admin": "https://unsw.libcal.com/admin/calendar/11369"
       },
-      "seats": "",
-      "registration": false,
-      "color": "#B3C8EF",
-      "featured_image": "",
+      "seats": 200,
+      "registration": true,
+      "registration_form_id": 0,
+      "registration_series_linked": false,
+      "has_registration_opened": true,
+      "has_registration_closed": true,
+      "physical_seats": 200,
+      "physical_seats_taken": 0,
+      "online_seats": 0,
+      "online_seats_taken": 0,
+      "seats_taken": 0,
+      "wait_list": false,
+      "color": "#FFFFFF",
+      "featured_image": "https://lcimages-au.s3.amazonaws.com/data/feat_img/4379/template/1617974844.png",
       "geolocation": null,
-      "future_dates": [],
+      "future_dates": [
+        {
+          "event_id": 5739099,
+          "start": "2024-11-13T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739100,
+          "start": "2024-11-14T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739101,
+          "start": "2024-11-15T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739102,
+          "start": "2024-11-16T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739103,
+          "start": "2024-11-17T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
+        }
+      ],
       "registration_cost": 0,
       "more_info": "",
       "setup_time": 0,
       "teardown_time": 0
     },
     {
-      "id": 5738768,
-      "title": "Soon",
-      "allday": false,
-      "start": "2024-11-04T16:00:00+11:00",
-      "end": "2024-11-04T20:00:00+11:00",
-      "description": "",
-      "url": {
-        "public": "https://unsw.libcal.com/event/5738768",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738768"
-      },
-      "location": {
-        "id": 0,
-        "type": 0,
-        "name": ""
-      },
-      "campus": {
-        "id": 5505,
-        "name": "Law Library"
-      },
-      "category": [],
-      "owner": {
-        "id": 58243,
-        "name": "Stefano Bernardi"
-      },
-      "presenter": "",
-      "calendar": {
-        "id": 11369,
-        "name": "Test Calendar - What's On Today",
-        "public": "https://unsw.libcal.com/calendar?cid=11369",
-        "admin": "https://unsw.libcal.com/admin/calendar/11369"
-      },
-      "seats": "",
-      "registration": false,
-      "color": "#B3C8EF",
-      "featured_image": "",
-      "geolocation": null,
-      "future_dates": [],
-      "registration_cost": 0,
-      "more_info": "",
-      "setup_time": 0,
-      "teardown_time": 0
-    },
-    {
-      "id": 5738076,
+      "id": 5739110,
       "title": "Test Tomorrow",
       "allday": false,
-      "start": "2024-11-04T20:00:00+11:00",
-      "end": "2024-11-04T21:00:00+11:00",
+      "start": "2024-11-12T20:00:00+11:00",
+      "end": "2024-11-12T21:00:00+11:00",
       "description": "",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738076",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738076"
+        "public": "https://unsw.libcal.com/event/5739110",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739110"
       },
       "location": {
         "id": 19860,
@@ -268,58 +322,15 @@
       "teardown_time": 0
     },
     {
-      "id": 5737918,
-      "title": "Test Late 3",
-      "allday": false,
-      "start": "2024-11-04T21:00:00+11:00",
-      "end": "2024-11-04T22:00:00+11:00",
-      "description": "",
-      "url": {
-        "public": "https://unsw.libcal.com/event/5737918",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5737918"
-      },
-      "location": {
-        "id": 0,
-        "type": 0,
-        "name": ""
-      },
-      "campus": {
-        "id": 5505,
-        "name": "Law Library"
-      },
-      "category": [],
-      "owner": {
-        "id": 58243,
-        "name": "Stefano Bernardi"
-      },
-      "presenter": "",
-      "calendar": {
-        "id": 11369,
-        "name": "Test Calendar - What's On Today",
-        "public": "https://unsw.libcal.com/calendar?cid=11369",
-        "admin": "https://unsw.libcal.com/admin/calendar/11369"
-      },
-      "seats": "",
-      "registration": false,
-      "color": "#B3C8EF",
-      "featured_image": "",
-      "geolocation": null,
-      "future_dates": [],
-      "registration_cost": 0,
-      "more_info": "",
-      "setup_time": 0,
-      "teardown_time": 0
-    },
-    {
-      "id": 5738072,
+      "id": 5739099,
       "title": "Scholarly Resources for Teaching event",
       "allday": true,
-      "start": "2024-11-05T00:00:00+11:00",
-      "end": "2024-11-05T23:59:59+11:00",
+      "start": "2024-11-13T00:00:00+11:00",
+      "end": "2024-11-13T23:59:59+11:00",
       "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738072",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738072"
+        "public": "https://unsw.libcal.com/event/5739099",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739099"
       },
       "location": {
         "id": 0,
@@ -327,8 +338,8 @@
         "name": ""
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "audience": [
         {
@@ -362,7 +373,7 @@
       "registration_form_id": 0,
       "registration_series_linked": false,
       "has_registration_opened": true,
-      "has_registration_closed": true,
+      "has_registration_closed": false,
       "physical_seats": 200,
       "physical_seats_taken": 0,
       "online_seats": 0,
@@ -374,16 +385,44 @@
       "geolocation": null,
       "future_dates": [
         {
-          "event_id": 5738073,
-          "start": "2024-11-06T00:00:00+11:00"
+          "event_id": 5739100,
+          "start": "2024-11-14T00:00:00+11:00"
         },
         {
-          "event_id": 5738074,
-          "start": "2024-11-07T00:00:00+11:00"
+          "event_id": 5739101,
+          "start": "2024-11-15T00:00:00+11:00"
         },
         {
-          "event_id": 5738075,
-          "start": "2024-11-08T00:00:00+11:00"
+          "event_id": 5739102,
+          "start": "2024-11-16T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739103,
+          "start": "2024-11-17T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
         }
       ],
       "registration_cost": 0,
@@ -392,15 +431,120 @@
       "teardown_time": 0
     },
     {
-      "id": 5737984,
-      "title": "Monday - Important",
+      "id": 5739100,
+      "title": "Scholarly Resources for Teaching event",
+      "allday": true,
+      "start": "2024-11-14T00:00:00+11:00",
+      "end": "2024-11-14T23:59:59+11:00",
+      "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739100",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739100"
+      },
+      "location": {
+        "id": 0,
+        "type": 0,
+        "name": ""
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "audience": [
+        {
+          "id": 368,
+          "name": "HDR (Higher degree research) student"
+        },
+        {
+          "id": 369,
+          "name": "All academic staff"
+        }
+      ],
+      "category": [
+        {
+          "id": 44922,
+          "name": "Scholarly Resources"
+        }
+      ],
+      "owner": {
+        "id": 53611,
+        "name": "Nicole Bastock"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": 200,
+      "registration": true,
+      "registration_form_id": 0,
+      "registration_series_linked": false,
+      "has_registration_opened": true,
+      "has_registration_closed": false,
+      "physical_seats": 200,
+      "physical_seats_taken": 0,
+      "online_seats": 0,
+      "online_seats_taken": 0,
+      "seats_taken": 0,
+      "wait_list": false,
+      "color": "#FFFFFF",
+      "featured_image": "https://lcimages-au.s3.amazonaws.com/data/feat_img/4379/template/1617974844.png",
+      "geolocation": null,
+      "future_dates": [
+        {
+          "event_id": 5739101,
+          "start": "2024-11-15T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739102,
+          "start": "2024-11-16T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739103,
+          "start": "2024-11-17T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
+        }
+      ],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 5739112,
+      "title": "Test Late",
       "allday": false,
-      "start": "2024-11-05T15:00:00+11:00",
-      "end": "2024-11-05T16:00:00+11:00",
+      "start": "2024-11-14T08:00:00+11:00",
+      "end": "2024-11-14T09:00:00+11:00",
       "description": "",
       "url": {
-        "public": "https://unsw.libcal.com/event/5737984",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5737984"
+        "public": "https://unsw.libcal.com/event/5739112",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739112"
       },
       "location": {
         "id": 19860,
@@ -440,15 +584,15 @@
       "teardown_time": 0
     },
     {
-      "id": 5738073,
+      "id": 5739101,
       "title": "Scholarly Resources for Teaching event",
       "allday": true,
-      "start": "2024-11-06T00:00:00+11:00",
-      "end": "2024-11-06T23:59:59+11:00",
+      "start": "2024-11-15T00:00:00+11:00",
+      "end": "2024-11-15T23:59:59+11:00",
       "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738073",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738073"
+        "public": "https://unsw.libcal.com/event/5739101",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739101"
       },
       "location": {
         "id": 0,
@@ -456,8 +600,8 @@
         "name": ""
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "audience": [
         {
@@ -503,12 +647,36 @@
       "geolocation": null,
       "future_dates": [
         {
-          "event_id": 5738074,
-          "start": "2024-11-07T00:00:00+11:00"
+          "event_id": 5739102,
+          "start": "2024-11-16T00:00:00+11:00"
         },
         {
-          "event_id": 5738075,
-          "start": "2024-11-08T00:00:00+11:00"
+          "event_id": 5739103,
+          "start": "2024-11-17T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
         }
       ],
       "registration_cost": 0,
@@ -517,15 +685,15 @@
       "teardown_time": 0
     },
     {
-      "id": 5738074,
+      "id": 5739102,
       "title": "Scholarly Resources for Teaching event",
       "allday": true,
-      "start": "2024-11-07T00:00:00+11:00",
-      "end": "2024-11-07T23:59:59+11:00",
+      "start": "2024-11-16T00:00:00+11:00",
+      "end": "2024-11-16T23:59:59+11:00",
       "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738074",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738074"
+        "public": "https://unsw.libcal.com/event/5739102",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739102"
       },
       "location": {
         "id": 0,
@@ -533,8 +701,8 @@
         "name": ""
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "audience": [
         {
@@ -580,8 +748,32 @@
       "geolocation": null,
       "future_dates": [
         {
-          "event_id": 5738075,
-          "start": "2024-11-08T00:00:00+11:00"
+          "event_id": 5739103,
+          "start": "2024-11-17T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
         }
       ],
       "registration_cost": 0,
@@ -590,15 +782,15 @@
       "teardown_time": 0
     },
     {
-      "id": 5738075,
+      "id": 5739103,
       "title": "Scholarly Resources for Teaching event",
       "allday": true,
-      "start": "2024-11-08T00:00:00+11:00",
-      "end": "2024-11-08T23:59:59+11:00",
+      "start": "2024-11-17T00:00:00+11:00",
+      "end": "2024-11-17T23:59:59+11:00",
       "description": "<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">UNSW Library is hosting an online<span>&nbsp;</span><em style=\"box-sizing: inherit;\">Scholarly Resources for Teaching Week</em><span>&nbsp;</span>with events from<strong> X to Y</strong>, 2021.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Targeted subject area online sessions will be presented by experts from the publishers themselves, with a focus on use of the product resources in teaching and learning at UNSW.</p>\n\n<p style=\"box-sizing: inherit; font-size: 13px; line-height: 20px; color: rgb(35, 31, 32); font-family: sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Library staff will also be there to answer your questions about linking the resources in Leganto. Sessions will be recorded and the link sent to staff who have registered for a session.</p>",
       "url": {
-        "public": "https://unsw.libcal.com/event/5738075",
-        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5738075"
+        "public": "https://unsw.libcal.com/event/5739103",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739103"
       },
       "location": {
         "id": 0,
@@ -606,8 +798,8 @@
         "name": ""
       },
       "campus": {
-        "id": 5505,
-        "name": "Law Library"
+        "id": 4754,
+        "name": "Main Library"
       },
       "audience": [
         {
@@ -651,7 +843,32 @@
       "color": "#FFFFFF",
       "featured_image": "https://lcimages-au.s3.amazonaws.com/data/feat_img/4379/template/1617974844.png",
       "geolocation": null,
-      "future_dates": [],
+      "future_dates": [
+        {
+          "event_id": 5739104,
+          "start": "2024-11-18T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739105,
+          "start": "2024-11-19T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739106,
+          "start": "2024-11-20T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739107,
+          "start": "2024-11-21T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739108,
+          "start": "2024-11-22T00:00:00+11:00"
+        },
+        {
+          "event_id": 5739109,
+          "start": "2024-11-23T00:00:00+11:00"
+        }
+      ],
       "registration_cost": 0,
       "more_info": "",
       "setup_time": 0,
