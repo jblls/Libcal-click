@@ -1,7 +1,7 @@
 // Variables to store the last fetched data for comparison if data changes
 let currentEventsData = null;
 
-const visibleCards = 10;
+const visibleCards = 8;
 const visibleCards_footer = 5;
 let currentStartIndex = 0;
 let currentStartIndex_footer = 0;
@@ -651,7 +651,7 @@ function updateElementHeight(elementSelector, containerSelector, multiplier) {
     const element = document.querySelector(elementSelector);
     const container = document.querySelector(containerSelector);
 
-    // Exit early if either the element or container doesn't exist
+    // If the element doesn't exist, set default events-container & footer-events-container vertical sizes
     if (!element) {
         console.log('No card elements');
         if (container.id === 'events-container') {
@@ -670,6 +670,22 @@ function updateElementHeight(elementSelector, containerSelector, multiplier) {
     // Set the height of the container based on the element's total height and multiplier
     container.style.height = `${totalHeight * multiplier}px`;
 }
+
+
+
+const slides = document.querySelectorAll('.banner-slide');
+let bannerIndex = 0;
+function showNextBanner() {
+    // Hide current slide
+    slides[bannerIndex].classList.remove('active');
+    // Update index
+    bannerIndex = (bannerIndex + 1) % slides.length;
+    // Show next slide
+    slides[bannerIndex].classList.add('active');
+}
+
+
+
 
 
 // Initialize the page and refresh every 10 minutes
@@ -762,6 +778,10 @@ function init() {
         }
     });
 
+
+
+    // Automatically switch banner every 5 seconds
+    setInterval(showNextBanner, 15000);
 
 }
 

@@ -3,7 +3,7 @@
 /* ========================= */
 
 html {
-    font-size: 30px; 
+    font-size: 30px;
 }
 
 body {
@@ -17,7 +17,7 @@ body {
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; 
+    min-height: 100vh;
 }
 
 .header-container {
@@ -57,7 +57,8 @@ body {
     display: block;
 }
 
-.qr_event img, .qr_footer img {
+.qr_event img,
+.qr_footer img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -106,6 +107,7 @@ body {
     html {
         font-size: 12px;
     }
+
     .qr-button {
         display: none;
     }
@@ -128,8 +130,10 @@ body {
     }
 
     .qr-button {
-        display: inline-flex; /* Show button on small screens */
-        align-items: center; /* Center vertically */
+        display: inline-flex;
+        /* Show button on small screens */
+        align-items: center;
+        /* Center vertically */
         background-color: #738ba5;
         color: white;
         border-radius: 5px;
@@ -139,8 +143,10 @@ body {
     }
 
     .qr-button:hover {
-        background-color: #0056b3; /* Darker color on hover */
+        background-color: #0056b3;
+        /* Darker color on hover */
     }
+
     .card-title,
     .card-title-footer {
         max-width: 35rem;
@@ -161,8 +167,10 @@ body {
     }
 
     .qr-button {
-        display: inline-flex; /* Show button on small screens */
-        align-items: center; /* Center vertically */
+        display: inline-flex;
+        /* Show button on small screens */
+        align-items: center;
+        /* Center vertically */
         background-color: #738ba5;
         color: white;
         border-radius: 5px;
@@ -172,8 +180,10 @@ body {
     }
 
     .qr-button:hover {
-        background-color: #0056b3; /* Darker color on hover */
+        background-color: #0056b3;
+        /* Darker color on hover */
     }
+
     .card-title,
     .card-title-footer {
         max-width: 25rem;
@@ -191,22 +201,26 @@ body {
 /*         Header           */
 /* ========================= */
 
-.hero-container{
+.hero-container {
     position: absolute;
     z-index: -1;
     top: -8rem;
     left: -10rem;
     width: 25rem;
 }
+
 .hero {
     fill: #ffdc00;
 }
 
 header {
     /*background-color: #ffffff;*/
-    padding: 0.625rem; /* 10px */
-    border-bottom: 0.075rem solid #c2c2c2; /* 1.2px */
-    margin-bottom: 1.25rem; /* 20px */
+    padding: 0.625rem;
+    /* 10px */
+    border-bottom: 0.075rem solid #c2c2c2;
+    /* 1.2px */
+    margin-bottom: 1.25rem;
+    /* 20px */
 }
 
 .library-header {
@@ -215,7 +229,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1.25rem 0; /* 20px */
+    margin: 1.25rem 0;
+    /* 20px */
 }
 
 .library-header img {
@@ -225,7 +240,8 @@ header {
 .custom-line {
     margin-left: 0;
     border: none;
-    border-top: 0.3125rem solid gray; /* 5px */
+    border-top: 0.3125rem solid gray;
+    /* 5px */
     width: 33%;
     margin: 0;
 }
@@ -253,7 +269,8 @@ header {
 #month-container i {
     font-size: 1.4rem;
     color: #636363;
-    margin-right: 0.625rem; /* 10px */
+    margin-right: 0.625rem;
+    /* 10px */
 }
 
 .calendar-container {
@@ -266,8 +283,10 @@ header {
 
 .highlight {
     background-color: rgb(255, 187, 169);
-    border-radius: 0.25rem; /* 4px */
-    padding: 0.3125rem; /* 5px */
+    border-radius: 0.25rem;
+    /* 4px */
+    padding: 0.3125rem;
+    /* 5px */
     font-weight: bold;
 }
 
@@ -282,40 +301,42 @@ header {
 #events-container {
     overflow: hidden;
 }
+
 #footer-events-container {
     overflow: hidden;
 }
+
 .carousel {
     display: flex;
     flex-direction: column;
     transition: transform 2s ease;
-  }
+}
 
-  .carousel-footer {
+.carousel-footer {
     display: flex;
     flex-direction: column;
     transition: transform 2s ease;
-  }
+}
 
-  .indicators {
+.indicators {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-  }
-  
-  .indicators .dot {
+}
+
+.indicators .dot {
     width: 10px;
     height: 10px;
     margin: 0 5px;
     border-radius: 50%;
     background-color: #ccc;
     transition: background-color 0.3s;
-  }
-  
-  .indicators .dot.active {
+}
+
+.indicators .dot.active {
     background-color: #ffdc00;
-  }
+}
 
 
 
@@ -326,10 +347,12 @@ header {
 }
 
 .no-events-text {
-    font-size: 2.0rem; /* 40px */
+    font-size: 2.0rem;
+    /* 40px */
     font-weight: bold;
     color: rgb(161, 161, 161);
-    margin: 9.375rem 0 3rem 0; /* 150px */
+    margin: 9.375rem 0 3rem 0;
+    /* 150px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -337,7 +360,8 @@ header {
 
 .no-events-text i {
     font-size: 3rem;
-    margin-right: 1.875rem; /* 30px */
+    margin-right: 1.875rem;
+    /* 30px */
 }
 
 .soon-card {
@@ -349,17 +373,23 @@ header {
 }
 
 .card-body {
-    padding-top: 0.4375rem; /* 7px */
-    padding-bottom: 0.3125rem; /* 5px */
+    padding-top: 0.4375rem;
+    /* 7px */
+    padding-bottom: 0.3125rem;
+    /* 5px */
 }
 
 .title-container {
     display: flex;
-    align-items: flex-start; /* Aligns items vertically centered */
-    gap: 10px; /* Adjust the gap between title and "Happening soon" */
+    align-items: flex-start;
+    /* Aligns items vertically centered */
+    gap: 10px;
+    /* Adjust the gap between title and "Happening soon" */
 }
 
-.happening-soon, .later-today, .happening-now {
+.happening-soon,
+.later-today,
+.happening-now {
     top: 0;
     right: 0px;
     color: #000000;
@@ -370,7 +400,8 @@ header {
     padding-right: 0.3rem;
 }
 
-.happening-soon, .happening-now {
+.happening-soon,
+.happening-now {
     background-color: rgb(255, 228, 105);
 }
 
@@ -383,14 +414,55 @@ header {
 /* ========================= */
 
 .card-text {
-    margin-bottom: 0.0625rem; /* 1px */
-    text-indent: 0.1875rem; /* 3px */
+    margin-bottom: 0.0625rem;
+    /* 1px */
+    text-indent: 0.1875rem;
+    /* 3px */
 }
 
 .card-text .label {
     display: inline-block;
-    width: 6.25rem; /* 100px */
+    width: 6.25rem;
+    /* 100px */
 }
+
+/* ========================= */
+/*         Card Text        */
+/* ========================= */
+
+.banner-container {
+    width: 100%;
+    height: calc(2 * 6.879rem);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    background-color: #ffdc00; /* Adjust as needed */
+}
+
+.banner-slide {
+    position: absolute; /* Positions slides on top of each other */
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Prevent interaction when not active */
+}
+
+.banner-slide.active {
+    opacity: 1; /* Fully visible */
+    pointer-events: auto; /* Allow interaction */
+}
+
+.banner-slide .bi {
+    font-size: 4rem;
+    margin-right: 0.5rem;
+}
+
 
 /* ========================= */
 /*          Footer          */
@@ -405,15 +477,18 @@ footer {
     text-align: left;
     font-weight: bold;
     font-size: 2rem;
-    margin-bottom: 1.875rem; /* 30px */
+    margin-bottom: 1.875rem;
+    /* 30px */
 }
 
 .footer-item {
     display: flex;
     background-color: #4b4b4b;
-    padding: 0.625rem; /* 10px */
+    padding: 0.625rem;
+    /* 10px */
     align-items: center;
-    border-radius: 0.3125rem; /* 5px */
+    border-radius: 0.3125rem;
+    /* 5px */
 }
 
 .card-date-footer {
@@ -424,32 +499,39 @@ footer {
     text-align: center;
 }
 
-.card-date-footer > * {
+.card-date-footer>* {
     flex: 1;
-    min-width: 3.125rem; /* 50px */
+    min-width: 3.125rem;
+    /* 50px */
 }
 
 .card-date-footer strong {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.5rem;
+    /* 24px */
 }
 
 .card-date-footer span {
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem;
+    /* 14px */
 }
 
 .card-details-footer {
-    margin-left: 0.9375rem; /* 15px */
+    margin-left: 0.9375rem;
+    /* 15px */
     flex-grow: 1;
     text-align: left;
 }
 
 .card-title-footer {
     font-weight: bold;
-    font-size: 1.125rem; /* 18px */
-    margin-bottom: 0.3125rem; /* 5px */
+    font-size: 1.125rem;
+    /* 18px */
+    margin-bottom: 0.3125rem;
+    /* 5px */
 }
 
 .card-timelocation-footer {
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem;
+    /* 14px */
     color: #ccc;
 }
