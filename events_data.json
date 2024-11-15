@@ -873,6 +873,438 @@
       "more_info": "",
       "setup_time": 0,
       "teardown_time": 0
+    },
+    {
+      "id": 57391111,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911112,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911113,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911114,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911115,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911116,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911118,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911181,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
+    },
+    {
+      "id": 573911119,
+      "title": "Monday - Important",
+      "allday": false,
+      "start": "2024-11-15T15:00:00+11:00",
+      "end": "2024-11-15T16:00:00+11:00",
+      "description": "",
+      "url": {
+        "public": "https://unsw.libcal.com/event/5739111",
+        "admin": "https://unsw.libcal.com/aevent.php?c=11369&m=edit&event_id=5739111"
+      },
+      "location": {
+        "id": 19860,
+        "type": 0,
+        "name": "Test - Help Zone"
+      },
+      "campus": {
+        "id": 4754,
+        "name": "Main Library"
+      },
+      "category": [
+        {
+          "id": 44924,
+          "name": "Important"
+        }
+      ],
+      "owner": {
+        "id": 58243,
+        "name": "Stefano Bernardi"
+      },
+      "presenter": "",
+      "calendar": {
+        "id": 11369,
+        "name": "Test Calendar - What's On Today",
+        "public": "https://unsw.libcal.com/calendar?cid=11369",
+        "admin": "https://unsw.libcal.com/admin/calendar/11369"
+      },
+      "seats": "",
+      "registration": false,
+      "color": "#B3C8EF",
+      "featured_image": "",
+      "geolocation": null,
+      "future_dates": [],
+      "registration_cost": 0,
+      "more_info": "",
+      "setup_time": 0,
+      "teardown_time": 0
     }
   ]
 }

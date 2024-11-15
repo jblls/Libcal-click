@@ -435,9 +435,6 @@ header {
     height: calc(2 * 6.879rem);
     position: relative;
     overflow: hidden;
-    display: flex;
-    justify-content: center; 
-    align-items: center;    
     background-color: #ffdc00; /* Adjust as needed */
 }
 
@@ -451,7 +448,12 @@ header {
     align-items: center;
     opacity: 0; /* Initially hidden */
     pointer-events: none; /* Prevent interaction when not active */
+    font-size: 1.2rem;
+    text-align: center;
+
 }
+
+
 
 .banner-slide.active {
     opacity: 1; /* Fully visible */
@@ -463,6 +465,19 @@ header {
     margin-right: 0.5rem;
 }
 
+.slide-image {
+    margin-left: 4rem; /* Adjust padding as needed */
+    width: 6rem; 
+    height: auto;
+}
+
+.text-col {
+    display: flex;
+    flex-direction: column; /* Stack h1 and a vertically */
+    align-items: center; /* Center text horizontally */
+    text-align: center; /* Center text within each child element */
+    margin-top: 1rem; /* Optional margin for spacing */
+}
 
 /* ========================= */
 /*          Footer          */
