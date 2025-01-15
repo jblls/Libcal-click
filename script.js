@@ -493,8 +493,18 @@ function displayFooterEvents(events) {
 
 
 function filterAndSortFooterEvents(events, currentDate) {
-    const tomorrow = new Date(currentDate).setHours(0, 0, 0, 0);
-    const DaysAhead = new Date(currentDate).setDate(currentDate.getDate() + 5);
+    //const tomorrow = new Date(currentDate).setHours(0, 0, 0, 0);
+    //const DaysAhead = new Date(currentDate).setDate(currentDate.getDate() + 5);
+    
+    // Set "tomorrow" to 15/01/2025 00:00:00
+    const tomorrow = new Date(currentDate);
+    tomorrow.setDate(tomorrow.getDate() + 1); // Move to the next day
+    tomorrow.setHours(0, 0, 0, 0); // Reset to midnight
+
+    // Set "DaysAhead" to 19/01/2025 23:59:59
+    const DaysAhead = new Date(currentDate);
+    DaysAhead.setDate(DaysAhead.getDate() + 5); // Move to 5 days later
+    DaysAhead.setHours(23, 59, 59, 999); // Set to end of day
 
     return events.events
         .filter(event => {
