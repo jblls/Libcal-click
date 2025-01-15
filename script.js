@@ -260,7 +260,7 @@ function displayEvents(events, selectedDate) {
 
     if (relevantEvents.length === 0) {
         eventContainer.appendChild(createNoEventsCard());
-        genQRCode("noevents", "https://www.library.unsw.edu.au/about-unsw-library/whats-on");
+        //genQRCode("noevents", "https://www.library.unsw.edu.au/about-unsw-library/whats-on");
     } else {
         relevantEvents.forEach(event => {
             const { card, timeDiff } = createEventCard(event, selectedDate);
@@ -327,8 +327,8 @@ function createNoEventsCard() {
     card.classList.add('no-events');
     card.innerHTML = `
         <div class="no-events-text">
-        <i class="bi bi-emoji-frown"></i>
-        No events at Main Library
+        <i class="bi bi-calendar-x"></i>
+        No events today 
         </div>
         <div id="noevents">
         </div>
