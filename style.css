@@ -461,13 +461,13 @@ header {
 }
 
 .banner-slide .bi {
-    font-size: 4rem;
-    margin-right: 0.5rem;
+    font-size: 5rem;
+    margin-right: 1.5rem;
 }
 
 .slide-image {
     margin-left: 4rem; /* Adjust padding as needed */
-    width: 6rem; 
+    width: 5rem; 
     height: auto;
 }
 
