@@ -475,7 +475,7 @@ function displayFooterEvents(events) {
                 <div class="card-title-footer">${event.title}</div>
                 <div class="card-timelocation-footer">
                     <span class="time">${formatTime(eventStart)} - ${formatTime(eventEnd)}</span>
-                    <i class="bi bi-dash-lg"></i>
+                    <i class="bi bi-geo-alt-fill"></i>
                     <span class="location"> ${location}</span>
                 </div>
             </div>
