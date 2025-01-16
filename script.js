@@ -349,8 +349,8 @@ function createEventCard(event, selectedDate) {
         <div>
             <h5 class="card-title">${event.title}</h5> 
             <!--   <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>   -->
+            <p class="card-text"><span class="label">Time:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
             <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
-            <p class="card-text"><span class="label">When:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
         </div>
         </div>
 
