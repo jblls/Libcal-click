@@ -531,7 +531,7 @@ footer {
 }
 
 .card-details-footer {
-    margin-left: 0.9375rem;
+    margin-left: 1.5rem;
     /* 15px */
     flex-grow: 1;
     text-align: left;
@@ -547,7 +547,7 @@ footer {
 
 .card-timelocation-footer {
     display: grid;
-    grid-template-columns: 12rem 1rem 1rem; /* Fixed widths for each column */
+    grid-template-columns: 1rem 12rem 1rem 1rem; /* Fixed widths for each column */
     gap: 0.5rem; /* Space between the columns */
     white-space: nowrap; /* Prevent wrapping of content */
     width: max-content; /* Ensures the grid only takes as much space as needed */
