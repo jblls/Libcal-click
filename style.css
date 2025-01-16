@@ -439,16 +439,16 @@ header {
 }
 
 .banner-slide {
-    position: absolute; /* Positions slides on top of each other */
+    position: absolute; 
     width: 100%;
     height: 100%;
-    transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
-    display: flex;
-    justify-content: center;
+    transition: opacity 0.5s ease-in-out; 
+    display: grid;
+    grid-template-columns: 33% 33% 33%; /* Icon, text column, and image */
     align-items: center;
-    opacity: 0; /* Initially hidden */
-    pointer-events: none; /* Prevent interaction when not active */
-    font-size: 1.2rem;
+    opacity: 0; 
+    pointer-events: none; 
+    font-size: 1.0rem;
     text-align: center;
 
 }
@@ -462,21 +462,26 @@ header {
 
 .banner-slide .bi {
     font-size: 5rem;
-    margin-right: 1.5rem;
+    margin-right: 3rem;
+    justify-self: right;
 }
 
 .slide-image {
-    margin-left: 4rem; /* Adjust padding as needed */
+    /*margin-left: 4rem;*/ 
     width: 5rem; 
     height: auto;
+    justify-self: center;
 }
 
-.text-col {
+.banner-slide .text-col h2 {
+    font-size: 2rem;
+}
+
+.qr-col {
     display: flex;
-    flex-direction: column; /* Stack h1 and a vertically */
-    align-items: center; /* Center text horizontally */
-    text-align: center; /* Center text within each child element */
-    margin-top: 1rem; /* Optional margin for spacing */
+    flex-direction: column; /* Stack QR code and URL vertically */
+    align-items: center; /* Center-align them */
+    gap: 10px; /* Space between QR code and URL */
 }
 
 /* ========================= */
