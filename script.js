@@ -381,7 +381,7 @@ function nowEvent(card) {
     // Create and add the "Happening soon" element
     const happeningSoonElement = document.createElement('div');
     happeningSoonElement.classList.add('happening-now');
-    happeningSoonElement.textContent = 'Happening now';
+    happeningSoonElement.textContent = 'Now';
     titleContainer.appendChild(happeningSoonElement);
 
     // Insert the title container at the beginning of the card-body
@@ -410,7 +410,7 @@ function soonEvent(card) {
     // Create and add the "Happening soon" element
     const happeningSoonElement = document.createElement('div');
     happeningSoonElement.classList.add('happening-soon');
-    happeningSoonElement.textContent = 'Happening soon';
+    happeningSoonElement.textContent = 'Soon';
     titleContainer.appendChild(happeningSoonElement);
 
     // Insert the title container at the beginning of the card-body

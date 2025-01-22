@@ -277,7 +277,7 @@ header {
 /* ========================= */
 
 #month-container i {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #636363;
     margin-right: 0.625rem;
     /* 10px */
@@ -401,28 +401,26 @@ header {
 
 .title-container {
     display: flex;
-    align-items: flex-start;
-    /* Aligns items vertically centered */
-    gap: 10px;
-    /* Adjust the gap between title and "Happening soon" */
+    gap: 20px;
 }
 
 .happening-soon,
 .happening-now {
-    top: 0;
-    right: 0px;
     color: #000000;
     padding-left: 0.3rem;
-    font-size: 1.rem;
-    font-weight: bold;
+    font-size: 1.25rem;
+    /*font-weight: bold;*/
     border-radius: 0.3rem;
     padding-right: 0.3rem;
     white-space: nowrap; /* Prevents line breaks within the element */
+    margin-bottom: 15px;
+    line-height: 45px;
 }
 
 .happening-soon,
 .happening-now {
     background-color: rgb(255, 228, 105);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
 }
 
 .later-today {
