@@ -21,7 +21,7 @@ body {
 }
 
 .header-container {
-    flex: 0, 0, auto;
+    font-family: Clancy;
 }
 
 .main {
@@ -42,6 +42,16 @@ body {
 .card {
     flex-direction: row;
     align-items: center;
+    border: var(--bs-card-border-width) solid rgb(0 0 0 / 0%);
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgb(230, 230, 230) !important;
+}
+
+.shadow-sm {
+    box-shadow: unset !important;
 }
 
 /* =========================== */
@@ -217,7 +227,7 @@ header {
     /*background-color: #ffffff;*/
     padding: 0.625rem;
     /* 10px */
-    border-bottom: 0.075rem solid #c2c2c2;
+    /*border-bottom: 0.075rem solid #c2c2c2;*/
     /* 1.2px */
     margin-bottom: 1.25rem;
     /* 20px */
@@ -234,7 +244,7 @@ header {
 }
 
 .library-header img {
-    max-height: 4rem;
+    max-height: 8rem;
 }
 
 .custom-line {
@@ -273,16 +283,22 @@ header {
     /* 10px */
 }
 
+#week-container {
+    font-size: 1.2rem;
+    gap: 3rem;
+}
+
 .calendar-container {
     /*background-color: #ffffff;*/
     padding: 0;
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
+    font-family: Clancy;
 }
 
 .highlight {
-    background-color: rgb(255, 187, 169);
+    background-color: rgb(255, 228, 105);
     border-radius: 0.25rem;
     /* 4px */
     padding: 0.3125rem;
@@ -309,13 +325,16 @@ header {
 .carousel {
     display: flex;
     flex-direction: column;
-    transition: transform 2s ease;
+    /*transition: transform 2s ease;*/
+    transition-delay: 0.5s; 
 }
 
 .carousel-footer {
+    transition-delay: 0.5s;  
+
     display: flex;
     flex-direction: column;
-    transition: transform 2s ease;
+    /*transition: transform 2s ease;*/
 }
 
 .indicators {
@@ -331,11 +350,12 @@ header {
     margin: 0 5px;
     border-radius: 50%;
     background-color: #ccc;
-    transition: background-color 0.3s;
+    transition: background-color 0.5s;
 }
 
 .indicators .dot.active {
     background-color: #ffdc00;
+    transition: background-color 1.0s;
 }
 
 
@@ -388,13 +408,12 @@ header {
 }
 
 .happening-soon,
-.later-today,
 .happening-now {
     top: 0;
     right: 0px;
     color: #000000;
     padding-left: 0.3rem;
-    font-size: 0.7rem;
+    font-size: 1.rem;
     font-weight: bold;
     border-radius: 0.3rem;
     padding-right: 0.3rem;
@@ -407,7 +426,8 @@ header {
 }
 
 .later-today {
-    background-color: rgb(230, 230, 230);
+    color: #00000000;
+    background-color: rgba(230, 230, 230, 0);
 }
 
 /* ========================= */
@@ -444,8 +464,8 @@ header {
     width: 100%;
     height: 100%;
     transition: opacity 0.5s ease-in-out; 
-    display: grid;
-    grid-template-columns: 33% 33% 33%; /* Icon, text column, and image */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     opacity: 0; 
     pointer-events: none; 
@@ -495,6 +515,7 @@ footer {
 }
 
 .footer-events-title {
+    font-family: Clancy;
     text-align: left;
     font-weight: bold;
     font-size: 2rem;

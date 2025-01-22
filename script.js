@@ -624,39 +624,56 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
     const cards = Array.from(cardContainer.children).filter(child => child.tagName === 'DIV');
     const totalCards = cards.length;
 
-    if (totalCards > visibleCards) {
-        const card = cards[0];
-        const offsetHeight = card.getBoundingClientRect().height;
-        const computedStyle = window.getComputedStyle(card);
-        const totalHeight = offsetHeight + parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom);
-
-        // Move the carousel
-        cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`;
-
-        // Update dots
-        updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards);
-
-        // Increment index for next rotation, cycling back if needed
-        const remainingCards = totalCards - currentStartIndex;
-        if (remainingCards > visibleCards) {
-            // Shift by visibleCards if there are enough remaining cards
-            currentStartIndex += visibleCards;
-        } else {
-            // Shift by the remaining cards if there are fewer than visibleCards left
-            currentStartIndex = 0; // Reset to the first set of cards after the last shift
-        }
-
-        // Ensure currentStartIndex stays within bounds
-        currentStartIndex = Math.min(currentStartIndex, totalCards - visibleCards);
-        //console.log(currentStartIndex);
-
-        return currentStartIndex;
-    } else {
-        // Reset the carousel position if not enough cards
-        cardContainer.style.transform = `translateY(0px)`;
-        return 0;
-    }
-}
+    if (totalCards > visibleCards) { 
+        const card = cards[0]; 
+        const offsetHeight = card.getBoundingClientRect().height; 
+        const computedStyle = window.getComputedStyle(card); 
+        const totalHeight = offsetHeight + parseFloat(computedStyle.marginTop) + parseFloat(computedStyle.marginBottom); 
+     
+        // Move the carousel 
+        cardContainer.style.transform = `translateY(-${currentStartIndex * totalHeight}px)`; 
+     
+        // Update dots 
+        updateDots(indicatorsContainer, currentStartIndex, visibleCards, totalCards); 
+     
+        // Hide all cards first 
+        cards.forEach(card => { 
+            card.style.opacity = 0; // Hide the card 
+            card.style.transition = 'opacity 0.5s ease 0.0s'; 
+        }); 
+     
+        // Calculate start and end indices for the current group of visible cards 
+        const endIndex = Math.min(currentStartIndex + visibleCards, totalCards); 
+     
+        // Show the cards in the current group 
+        for (let i = currentStartIndex; i < endIndex; i++) { 
+            cards[i].style.opacity = 1; // Make visible 
+            cards[i].style.transition = 'opacity 0.5s ease 0.5s'; 
+        } 
+         
+        // Increment index for next rotation, cycling back if needed 
+        const remainingCards = totalCards - currentStartIndex; 
+        if (remainingCards > visibleCards) { 
+            // Shift by visibleCards if there are enough remaining cards 
+            currentStartIndex += visibleCards; 
+        } else { 
+            // Shift by the remaining cards if there are fewer than visibleCards left 
+            currentStartIndex = 0; // Reset to the first set of cards after the last shift 
+        } 
+     
+        // Ensure currentStartIndex stays within bounds 
+        //currentStartIndex = Math.min(currentStartIndex, totalCards - visibleCards); 
+        //console.log(currentStartIndex); 
+     
+        return currentStartIndex; 
+    } else { 
+        // Reset the carousel position if not enough cards 
+        cardContainer.style.transform = `translateY(0px)`; 
+        return 0; 
+    } 
+  
+    
+} 
 
 
 function updateElementHeight(elementSelector, containerSelector, multiplier) {
