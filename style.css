@@ -47,7 +47,7 @@ body {
 
 .bg-light {
     --bs-bg-opacity: 1;
-    background-color: rgb(230, 230, 230) !important;
+    background-color: rgb(235, 235, 235) !important;
 }
 
 .shadow-sm {
@@ -393,15 +393,13 @@ header {
 }
 
 .card-body {
-    padding-top: 0.4375rem;
-    /* 7px */
-    padding-bottom: 0.3125rem;
-    /* 5px */
+    padding-top: 0.4375rem; /* 7px */
+    padding-bottom: 0.3125rem;  /* 5px */
 }
 
 .title-container {
     display: flex;
-    gap: 20px;
+    gap: 1.2rem;
 }
 
 .happening-soon,
@@ -409,12 +407,11 @@ header {
     color: #000000;
     padding-left: 0.3rem;
     font-size: 1.25rem;
-    /*font-weight: bold;*/
     border-radius: 0.3rem;
     padding-right: 0.3rem;
     white-space: nowrap; /* Prevents line breaks within the element */
-    margin-bottom: 15px;
-    line-height: 45px;
+    margin-bottom: var(--bs-card-title-spacer-y);
+    line-height: 1.2;
 }
 
 .happening-soon,

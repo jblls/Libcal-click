@@ -438,7 +438,7 @@ function laterEvent(card) {
     // Create and add the "Happening soon" element
     const happeningSoonElement = document.createElement('div');
     happeningSoonElement.classList.add('later-today');
-    happeningSoonElement.textContent = 'Later today';
+    happeningSoonElement.textContent = 'Later';
     titleContainer.appendChild(happeningSoonElement);
 
     // Insert the title container at the beginning of the card-body
