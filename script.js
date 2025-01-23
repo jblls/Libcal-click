@@ -349,7 +349,7 @@ function createServerDownCard() {
     card.innerHTML = `
         <div class="server-down-text">
         <i class="bi bi-wifi-off"></i>
-        System Offline
+        System offline
         </div>
         <div id="serverdown">
         </div>
