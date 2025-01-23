@@ -348,7 +348,7 @@ function createServerDownCard() {
     card.classList.add('server-down');
     card.innerHTML = `
         <div class="server-down-text">
-        <i class="bi bi-exclamation-triangle"></i>
+        <i class="bi bi-wifi-off"></i>
         System Offline
         </div>
         <div id="serverdown">
