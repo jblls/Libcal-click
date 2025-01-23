@@ -258,7 +258,13 @@ function displayEvents(events, selectedDate) {
     // Filter events from JSON for Today or Other days (clicked), and select first 20. If other day show ALL events, not just future ones.
     const relevantEvents = (isToday ? filterAndSortTodayEvents : filterAndSortOtherdayEvents)(events, selectedDate).slice(0, 20);
 
-    if (relevantEvents.length === 0) {
+    if (
+        events.events.length === 1 &&
+        events.events[0].title === "Server down"
+    ) {
+        //console.log(events);
+        eventContainer.appendChild(createServerDownCard());
+    } else if (relevantEvents.length === 0) {
         eventContainer.appendChild(createNoEventsCard());
         //genQRCode("noevents", "https://www.library.unsw.edu.au/about-unsw-library/whats-on");
     } else {
@@ -336,6 +342,20 @@ function createNoEventsCard() {
     return card;
 }
 
+// Function to create the "Server Down" card
+function createServerDownCard() {
+    const card = document.createElement('div');
+    card.classList.add('server-down');
+    card.innerHTML = `
+        <div class="server-down-text">
+        <i class="bi bi-exclamation-circle"></i>
+        Server down, <br> please try the Library website
+        </div>
+        <div id="serverdown">
+        </div>
+    `;
+    return card;
+}
 
 // Create event card
 function createEventCard(event, selectedDate) {
