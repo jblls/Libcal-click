@@ -349,7 +349,7 @@ function createServerDownCard() {
     card.innerHTML = `
         <div class="server-down-text">
         <i class="bi bi-exclamation-circle"></i>
-        Server down, <br> please try the Library website
+        System issue
         </div>
         <div id="serverdown">
         </div>
