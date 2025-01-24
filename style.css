@@ -358,6 +358,9 @@ header {
     transition: background-color 1.0s;
 }
 
+.indicators.single-dot .dot.active {
+    background-color: transparent;
+}
 
 
 .no-events {

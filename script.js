@@ -533,7 +533,7 @@ function filterAndSortFooterEvents(events, currentDate) {
         .filter(event => {
             const eventStart = new Date(event.start).getTime();
             return (
-                eventStart > tomorrow &&
+                eventStart >= tomorrow &&
                 eventStart <= DaysAhead &&
                 event.campus.name === 'Main Library' &&
                 event.location.name !== '' &&
@@ -607,6 +607,13 @@ function updateCarousel(cardContainer, indicatorsContainer, currentStartIndex, v
 function initializeDots(cardContainer, indicatorsContainer, visibleCards) {
     const totalCards = cardContainer.children.length;
     const totalDots = Math.max(0, Math.ceil(totalCards / visibleCards));
+
+      // Add a condition to update the CSS for single dot case
+      if (totalDots === 1) {
+        indicatorsContainer.classList.add('single-dot'); // Add a specific class
+    } else {
+        indicatorsContainer.classList.remove('single-dot'); // Remove it otherwise
+    }
 
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < totalDots; i++) {
