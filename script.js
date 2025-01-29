@@ -161,7 +161,7 @@ function displayMonthHeader() {
     const today = new Date();
 
     monthHeader.innerHTML = `
-        <i class="bi bi-calendar3"></i>
+        <i class="bi bi-calendar-week"></i>
         <h3>${today.toLocaleString('default', { month: 'long' })}</h3>
     `;
 }
