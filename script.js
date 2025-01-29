@@ -362,6 +362,9 @@ function createEventCard(event, selectedDate) {
     const eventStartDate = new Date(event.start);
     const timeDiff = eventStartDate - selectedDate;
 
+    // Check if the event starts at exactly 12:00 AM
+    const isAllDay = eventStartDate.getHours() === 0 && eventStartDate.getMinutes() === 0;
+
     const card = document.createElement('div');
     card.classList.add('card', 'mb-3', 'shadow-sm', 'bg-light');
     card.innerHTML = `
@@ -369,7 +372,9 @@ function createEventCard(event, selectedDate) {
         <div>
             <h5 class="card-title">${event.title}</h5> 
             <!--   <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>   -->
-            <p class="card-text"><span class="label">Time:</span> ${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}</p>
+            <p class="card-text"><span class="label">Time:</span> 
+                ${isAllDay ? "7:00 AM - 10:00 PM &nbsp;&nbsp; (All-day event)" : `${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}`}
+            </p>
             <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
         </div>
         </div>
@@ -479,6 +484,9 @@ function displayFooterEvents(events) {
         const eventStart = new Date(event.start);
         const eventEnd = new Date(event.end);
 
+        // Check if the event starts at exactly 12:00 AM
+        const isAllDay = eventStart.getHours() === 0 && eventStart.getMinutes() === 0;
+
         const dayNumber = eventStart.getDate();
         const dayName = eventStart.toLocaleString('default', { weekday: 'short' });
         const location = event.location.name || 'N/A';
@@ -495,7 +503,9 @@ function displayFooterEvents(events) {
                 <div class="card-title-footer">${event.title}</div>
                 <div class="card-timelocation-footer">
                     <i class="bi bi-stopwatch"></i>
-                    <span class="time">${formatTime(eventStart)} - ${formatTime(eventEnd)}</span>
+                    <span class="time">
+                          ${isAllDay ? "7:00 AM - 10:00 PM" : `${formatTime(eventStart)} - ${formatTime(eventEnd)}`} 
+                    </span>
                     <i class="bi bi-geo-alt-fill"></i>
                     <span class="location"> ${location}</span>
                 </div>

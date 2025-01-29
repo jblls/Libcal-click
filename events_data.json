@@ -4,8 +4,8 @@
             "id": 57472021000,
             "title": "Exhibition A - multiday to maximum days",
             "allday": true,
-            "start": "2025-01-25T00:00:00+11:00",
-            "end": "2025-01-25T23:59:59+11:00",
+            "start": "2025-01-31T00:00:01+11:00",
+            "end": "2025-01-31T23:59:59+11:00",
             "description": "",
             "url": {
                 "public": "https://unsw.libcal.com/event/5747202",
@@ -100,8 +100,8 @@
             "id": 57472021002,
             "title": "Exhibition A - multiday to maximum days +1",
             "allday": true,
-            "start": "2025-01-24T00:00:00+11:00",
-            "end": "2025-01-24T23:59:59+11:00",
+            "start": "2025-01-25T15:00:00+11:00",
+            "end": "2025-01-25T23:59:59+11:00",
             "description": "",
             "url": {
                 "public": "https://unsw.libcal.com/event/5747202",
