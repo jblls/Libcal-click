@@ -373,7 +373,7 @@ function createEventCard(event, selectedDate) {
             <h5 class="card-title">${event.title}</h5> 
             <!--   <p class="card-text"><span class="label">Library:</span> ${event.campus.name || 'N/A'}</p>   -->
             <p class="card-text"><span class="label">Time:</span> 
-                ${isAllDay ? "7:00 AM - 10:00 PM &nbsp;&nbsp; (All-day event)" : `${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}`}
+                ${isAllDay ? "7:00 AM - 10:00 PM" : `${formatTime(eventStartDate)} - ${formatTime(new Date(event.end))}`}
             </p>
             <p class="card-text"><span class="label">Location:</span> ${event.location.name || 'N/A'}</p>
         </div>
