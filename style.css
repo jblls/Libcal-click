@@ -277,10 +277,10 @@ header {
 /* ========================= */
 
 #month-container i {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: #636363;
-    margin-right: 0.625rem;
-    /* 10px */
+    margin-right: 0.7rem;
+    margin-top: -.3rem;
 }
 
 #week-container {
