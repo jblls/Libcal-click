@@ -355,7 +355,7 @@ header {
 
 .indicators .dot.active {
     background-color: #ffdc00;
-    transition: background-color 1.0s;
+    transition: background-color 0.5s 0.5s;
 }
 
 .indicators.single-dot .dot.active {
